@@ -12,6 +12,14 @@
 
 //♞ ■♞ ■ ♟
 
+static void interTile()
+{
+    printf("+");
+    for (int i = 0; i < SIZE_TILE; i++)
+        printf("-");
+}
+
+
 void print_board()
 {
     //printf(B_BLUE_ANSI"■\n♞    ■■"RESET_ANSI);
@@ -37,12 +45,26 @@ void print_board()
     char g[] = GREEN_ANSI"v"RESET_ANSI;
 #endif
 
-
+    tmp[3] = r;
             
     printf("\n");
-    printf("|%02d %s%s%s%s%s|", 0, tmp[0], tmp[1], tmp[2], tmp[3], tmp[4]);
+    printf("|%02d %s%s%s%s%s", 0, tmp[0], tmp[1], tmp[2], tmp[3], tmp[4]); // 9 char
 
 
+    int nbInHouse = 4;
+    for (int i = 0; i < 8*SIZE_TILE; i++)
+    {
+        if (i < nbInHouse)
+        {
+            printf("%s", y);
+        }
+        else printf(" ");
+    }
+
+    for (int i = 0; i < 8*SIZE_TILE; i++)
+        printf(" ");
+
+    
 
 
 

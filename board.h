@@ -9,10 +9,10 @@ typedef char horse_t;
 #define YELLOW_HOUSE 
 
 #define FOUR_COLORS(type, name) \
-	type yellow#name; \
-	type blue#name; \
-	type red#name; \
-	type green#name; \
+	type yellow##name; \
+	type blue##name; \
+	type red##name; \
+	type green##name; \
 
 typedef enum {
 	none = -1,
@@ -42,6 +42,7 @@ typedef struct {
 		} houses;
 		tile bBoard[BOARD_SIZE];
 	};
+
 
 	FOUR_COLORS(int, House)
 } board;

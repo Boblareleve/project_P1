@@ -24,6 +24,10 @@
 
 #define USE_ANSI
 
+
+#define SIZE_TILE 9
+
+
 void print_board();
 
 

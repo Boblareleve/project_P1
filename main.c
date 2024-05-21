@@ -27,7 +27,7 @@ int main()
     print_board();
 
 
-    printf(BLUE_ANSI"Bonjour bienvenu\n"RESET_ANSI);
+    printf("Bonjour bienvenu\n");
 
     bool continue_play = false; 
     char input[10];
