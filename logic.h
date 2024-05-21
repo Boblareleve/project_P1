@@ -7,6 +7,7 @@ typedef struct {
 	int numPlayers;
 	color curPlayer;
 	board b;
+	
 } gameState;
 
 void initGameState(gameState*);
