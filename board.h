@@ -14,6 +14,8 @@ typedef char horse_t;
 	type red##name; \
 	type green##name; \
 
+
+/*
 typedef enum {
 	none = -1,
 	yellow,
@@ -21,6 +23,7 @@ typedef enum {
 	red,
 	green
 } color;
+*/
 
 typedef enum {
 	none = ' ',
@@ -28,7 +31,7 @@ typedef enum {
 	blue = 'b',
 	red = 'r',
 	green = 'g'
-} horse;
+} color;
 
 typedef struct {
 	FOUR_COLORS(int, Count)
@@ -45,10 +48,11 @@ typedef struct {
 
 
 	FOUR_COLORS(int, House)
+	FOUR_COLORS(int, Finish)
 } board;
 
-horse getHorse(board, int pos);
-horse getHorseInHouse(board, color c, int pos);
+color getHorse(board, int pos);
+color getHorseInHouse(board, color c, int pos);
 int isRefuge(board, int pos);
 int isBarrage(board, int pos);
 

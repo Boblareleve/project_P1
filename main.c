@@ -5,6 +5,8 @@
 
 #include "input.h"
 #include "print.h"
+#include "logic.h"
+#include "board.h"
 
 
 /*
@@ -24,7 +26,10 @@ typedef struct {
 
 int main()
 {
-    print_board();
+    for (int i = 0; i < 19 * 9; i++)
+        printf("#");
+    gameState game;
+    //print_board(&game);
 
 
     printf("Bonjour bienvenu\n");

@@ -1,4 +1,6 @@
 #include "print.h"
+#include "logic.h"
+#include "board.h"
 
 
 
@@ -6,9 +8,10 @@
 
 // num case -> xx
 
-// +--------+
-// |xx bbjvr|
-// +--------+
+// +--------|
+// | xx bb  |
+// |    jvr |
+//          |
 
 //♞ ■♞ ■ ♟
 
@@ -20,7 +23,7 @@ static void interTile()
 }
 
 
-void print_board()
+void print_board(gameState *game)
 {
     //printf(B_BLUE_ANSI"■\n♞    ■■"RESET_ANSI);
     
@@ -51,10 +54,10 @@ void print_board()
     printf("|%02d %s%s%s%s%s", 0, tmp[0], tmp[1], tmp[2], tmp[3], tmp[4]); // 9 char
 
 
-    int nbInHouse = 4;
+    game->b.yellowHouse = 4;
     for (int i = 0; i < 8*SIZE_TILE; i++)
     {
-        if (i < nbInHouse)
+        if (i < game->b.yellowHouse)
         {
             printf("%s", y);
         }
