@@ -2,7 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+
 #include "input.h"
+#include "print.h"
+
 
 /*
 typedef struct {
@@ -21,9 +24,10 @@ typedef struct {
 
 int main()
 {
+    print_board();
 
 
-    printf("Bonjour bienvenu\n");
+    printf(BLUE_ANSI"Bonjour bienvenu\n"RESET_ANSI);
 
     bool continue_play = false; 
     char input[10];
