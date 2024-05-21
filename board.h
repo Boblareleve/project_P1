@@ -54,6 +54,6 @@ typedef struct {
 color getHorse(board, int pos);
 color getHorseInHouse(board, color c, int pos);
 int isRefuge(board, int pos);
-int isBarrage(board, int pos);
+color barrageAtPos(board, int pos);
 
 #endif
