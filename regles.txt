@@ -1,0 +1,37 @@
+Description basique des règles utilisées
+
+De 2 à 4 joueurs
+Plateau de petits chevaux
+
+-----
+|v|r|
+|---|
+|j|b|
+-----
+
+Au début de la partie, les joueurs ont leurs 4 chevaux dans leur maison
+
+Tour:
+    Les joueurs jouent à tour de role et lancent un dé 6.
+    Le joueur déplace le chaval sorti de son choix du nombre de cases
+    Si valeur de 5, le joueur peut décider de sortir un cheval de sa maison à la place
+    Si tous les chevaux sont sortis un 6 vaudra 7 pas.
+    Si un 6 est tiré, le joueur pourra relancer son dé (max 2 relancements).
+
+    Si une pièce arrive sur une case occupée par une pièce d'une autre couleur, elle 'mange' cette pièce qui doit retourner à sa maison
+    Si une pièce est mangée, le joueur qui l'a mangé doit donner un bonus de 20 cases à un de ses chevaux
+    Cependant il y a des cases 'safe' où les deux chevaux cohabitent simplement (2 chevaux max par case safe, si un troisième devrait s'y déplacer, son déplacement est annulé)
+    Les cases de sortie de maison sont safe et si deux pièces s'y situent déjà, alors celle qui y est arrivé le plus récemment est mangée.
+
+Barrière:
+    Lorsqu'un cheval arrive sur une case déjà occupée par un cheval de sa couleur, cela créée une barrière
+    Aucun cheval ne peut passer sur ou par-delà d'une barrière. Tout mouvement allant sur ou au-delà de la barrière sera annulé.
+    Le joueur peut déplacer un des deux chevaux pour 'casser' la barrière.
+    Si il tire un 6, il est obligé de casser la barrière.
+
+Escalier d'arrivée:
+    Lorsqu'un cheval a fait le tour du plateau et arrive devant l'escalier de sa couleur, il devra faire le nombre exact de pas requis pour arriver au centre
+    Exemple : un cheval est rentré dans l'escalier à la deuxième case. Son joueur devra tirer un 5 pour le mettre au centre.
+
+    Un cheval sur son escalier ne peut être mangé.
+    Quand les 4 chevaux d'un joueur sont arrivés au centre, ce joueur a gagné.
