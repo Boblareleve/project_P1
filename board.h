@@ -25,7 +25,14 @@ typedef enum {
 typedef struct {
 	FOUR_COLORS(int, Count)
 } tile_t;
-
+/*
+typedef struct {
+	int yellowCount;
+	int redCount;
+	int blueCount;
+	int greenCount;
+} tile_t;
+*/
 
 typedef struct {
 	union {
