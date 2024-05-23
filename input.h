@@ -17,7 +17,7 @@ typedef enum
 } input_t;
 
 
-int get_input(input_t, char* msg);
+int getInput(input_t, char* msg);
 
 
 #endif

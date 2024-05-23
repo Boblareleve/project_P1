@@ -31,7 +31,7 @@
 #define SIZE_TILE 9
 
 
-void print_board();
+void printBoard();
 
 
 #endif
