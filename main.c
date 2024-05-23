@@ -26,11 +26,12 @@ typedef struct {
 
 int main()
 {
-    for (int i = 0; i < 19 * 9; i++)
-        printf("#");
+    //for (int i = 0; i < 19 * 9; i++)
+    //    printf("#");
+    //printf("\n");
     gameState game;
-    //print_board(&game);
-
+    print_board(&game);
+    return (1);
 
     printf("Bonjour bienvenu\n");
 
