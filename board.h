@@ -14,46 +14,38 @@ typedef char horse_t;
 	type red##name; \
 	type green##name; \
 
-
-/*
-typedef enum {
-	none = -1,
-	yellow,
-	blue,
-	red,
-	green
-} color;
-*/
-
 typedef enum {
 	none = ' ',
 	yellow = 'y',
 	blue = 'b',
 	red = 'r',
 	green = 'g'
-} color;
+} color_t;
 
 typedef struct {
 	FOUR_COLORS(int, Count)
-} tile;
+} tile_t;
 
 
 typedef struct {
 	union {
 		struct {
-			FOUR_COLORS(tile, Zone[HOUSE_SIZE])
+			FOUR_COLORS(tile_t, Zone[HOUSE_SIZE])
 		} houses;
-		tile bBoard[BOARD_SIZE];
+		tile_t bBoard[BOARD_SIZE];
 	};
 
 
 	FOUR_COLORS(int, House)
 	FOUR_COLORS(int, Finish)
-} board;
+} board_t;
 
-color getHorse(board, int pos);
-color getHorseInHouse(board, color c, int pos);
-int isRefuge(board, int pos);
-color barrageAtPos(board, int pos);
+int isRefuge(board_t, int pos);
+color_t barrageAtPos(board_t, int pos);
+
+// Fait en sorte que la position reste entre 0 et BOARD_SIZE
+int wrapAroundPos(int pos);
+// Retourne la couleur du potentiel cheval mangé
+color_t isMovePossible(board_t, int startPos, int diceRoll, color_t curHorseColor);
 
 #endif
