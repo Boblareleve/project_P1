@@ -43,7 +43,7 @@ typedef struct {
 		struct {
 			FOUR_COLORS(tile, Zone[HOUSE_SIZE])
 		} houses;
-		tile bBoard[BOARD_SIZE];
+		tile_t bBoard[BOARD_SIZE];
 	};
 
 
@@ -51,8 +51,6 @@ typedef struct {
 	FOUR_COLORS(int, Finish)
 } board_t;
 
-color_t getHorse(board_t, int pos);
-color_t getHorseInHouse(board_t, color c, int pos);
 int isRefuge(board_t, int pos);
 color_t barrageAtPos(board_t, int pos);
 bool isMovePossible(board_t, int pos, color_t curHorseColor);
