@@ -21,25 +21,26 @@ void initGameState(gameState* game)
         game->b.bBoard[i].blueCount=0;
         game->b.bBoard[i].redCount=0;
     }
-    
+
+
     for (int i = 0;i < 7; i++)
     {
-        game->b.yellowfinishLine[i].yellowCount=0;
-        game->b.yellowfinishLine[i].greenCount=0;
-        game->b.yellowfinishLine[i].redCount=0;
-        game->b.yellowfinishLine[i].blueCount=0;
-        game->b.bluefinishLine[i].blueCount=0;
-        game->b.bluefinishLine[i].greenCount=0;
-        game->b.bluefinishLine[i].redCount=0;
-        game->b.bluefinishLine[i].yellowCount=0;
-        game->b.greenfinishLine[i].yellowCount=0;
-        game->b.greenfinishLine[i].redCount=0;
-        game->b.greenfinishLine[i].greenCount=0;
-        game->b.greenfinishLine[i].blueCount=0;
-        game->b.redfinishLine[i].blueCount=0;
-        game->b.redfinishLine[i].greenCount=0;
-        game->b.redfinishLine[i].redCount=0;
-        game->b.redfinishLine[i].yellowCount=0;
+        game->b.yellowFinishLine[i].yellowCount=0;
+        game->b.yellowFinishLine[i].greenCount=0;
+        game->b.yellowFinishLine[i].redCount=0;
+        game->b.yellowFinishLine[i].blueCount=0;
+        game->b.blueFinishLine[i].blueCount=0;
+        game->b.blueFinishLine[i].greenCount=0;
+        game->b.blueFinishLine[i].redCount=0;
+        game->b.blueFinishLine[i].yellowCount=0;
+        game->b.greenFinishLine[i].yellowCount=0;
+        game->b.greenFinishLine[i].redCount=0;
+        game->b.greenFinishLine[i].greenCount=0;
+        game->b.greenFinishLine[i].blueCount=0;
+        game->b.redFinishLine[i].blueCount=0;
+        game->b.redFinishLine[i].greenCount=0;
+        game->b.redFinishLine[i].redCount=0;
+        game->b.redFinishLine[i].yellowCount=0;
     }
 
 }
