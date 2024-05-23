@@ -35,6 +35,7 @@ typedef struct {
 		tile_t bBoard[BOARD_SIZE];
 	};
 
+	FOUR_COLORS(tile_t, finishLine[7])
 
 	FOUR_COLORS(int, House)
 	FOUR_COLORS(int, Finish)
