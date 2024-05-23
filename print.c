@@ -78,20 +78,21 @@ void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNu
     //for (int i = 0; i < 3; i++)
     // totalHorseCount(game, case) == 5 ? 
     printf(RESET_ANSI"|%-2d  ", lineNum+1);
-    if (lineNum == 0)
+
+    if (lineNum == 0) // première ligne
     {
-        ;
+        pritnf(RESET_ANSI"|%-2d  |", 68);
     }
-    else if (lineNum == -1)
+    else if (lineNum == 32) // dernière ligne
     {
-        ;
+        pritnf(RESET_ANSI"|%-2d  |", 34);
     }
     else if (lineNum < 25)
-        printf(B_YELLOW_ANSI"|    ");
-    else printf(  B_RED_ANSI"|    ");
+        printf(B_YELLOW_ANSI"| %s  |");
+    else printf(  B_RED_ANSI"| %s  |");
     
 
-    printf(RESET_ANSI"|%-2d  ", -10);
+    printf(RESET_ANSI"%-2d  ", 67 - lineNum);
     printf(RESET_ANSI"|");
     
 
