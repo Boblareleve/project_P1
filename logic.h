@@ -12,7 +12,6 @@ typedef struct {
 
 void initGameState(gameState*);
 color_t nextPlayer(gameState*);
-
 int diceRoll();
 
 #endif

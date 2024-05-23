@@ -24,15 +24,27 @@ void initGameState(gameState* game)
     for (int i=0;i<7;i++)
     {
         game->b.yellowfinishLine[i].yellowCount=0;
-        game->b.bluefinishLine[i]=0;
-        game->b.greenFinish[i]=0;
-        game->b.redfinishLine[i]=0;
+        game->b.yellowfinishLine[i].greenCount=0;
+        game->b.yellowfinishLine[i].redCount=0;
+        game->b.yellowfinishLine[i].blueCount=0;
+        game->b.bluefinishLine[i].blueCount=0;
+        game->b.bluefinishLine[i].greenCount=0;
+        game->b.bluefinishLine[i].redCount=0;
+        game->b.bluefinishLine[i].yellowCount=0;
+        game->b.greenfinishLine[i].yellowCount=0;
+        game->b.greenfinishLine[i].redCount=0;
+        game->b.greenfinishLine[i].greenCount=0;
+        game->b.greenfinishLine[i].blueCount=0;
+        game->b.redfinishLine[i].blueCount=0;
+        game->b.redfinishLine[i].greenCount=0;
+        game->b.redfinishLine[i].redCount=0;
+        game->b.redfinishLine[i].yellowCount=0;
     }
-//ajouter .yellow etc a chaque ligne
 
 }
-color nextPlayer(gameState* player)
+color_t nextPlayer(gameState* player)
 {
+    
     
 }
 
