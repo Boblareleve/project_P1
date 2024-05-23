@@ -40,7 +40,9 @@ typedef struct {
 	FOUR_COLORS(int, Finish)
 } board_t;
 
-int isRefuge(board_t, int pos);
+// Indique si la case est un refuge (indépendant de l'état du jeu)
+int isRefuge(int pos);
+// Indique si il y a un barrage à la position donnée
 color_t barrageAtPos(board_t, int pos);
 
 // Fait en sorte que la position reste entre 0 et BOARD_SIZE
