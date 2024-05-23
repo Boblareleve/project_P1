@@ -31,11 +31,11 @@ typedef enum {
 	blue = 'b',
 	red = 'r',
 	green = 'g'
-} color;
+} color_t;
 
 typedef struct {
 	FOUR_COLORS(int, Count)
-} tile;
+} tile_t;
 
 
 typedef struct {
@@ -49,11 +49,11 @@ typedef struct {
 
 	FOUR_COLORS(int, House)
 	FOUR_COLORS(int, Finish)
-} board;
+} board_t;
 
-color getHorse(board, int pos);
-color getHorseInHouse(board, color c, int pos);
-int isRefuge(board, int pos);
-color barrageAtPos(board, int pos);
+color_t getHorse(board_t, int pos);
+color_t getHorseInHouse(board_t, color c, int pos);
+int isRefuge(board_t, int pos);
+color barrageAtPos(board_t, int pos);
 
 #endif
