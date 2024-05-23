@@ -15,6 +15,20 @@
 
 //♞ ■♞ ■ ♟
 
+
+#ifdef USE_ANSI
+    char r[] = RED_ANSI"♞"RESET_ANSI;
+    char b[] = BLUE_ANSI"♞"RESET_ANSI;
+    char y[] = YELLOW_ANSI"♞"RESET_ANSI;
+    char g[] = GREEN_ANSI"♞"RESET_ANSI;
+#endif
+#ifndef USE_ANSI
+    char r[] = RED_ANSI"r"RESET_ANSI;
+    char b[] = BLUE_ANSI"b"RESET_ANSI;
+    char y[] = YELLOW_ANSI"j"RESET_ANSI;
+    char g[] = GREEN_ANSI"v"RESET_ANSI;
+#endif
+
 static void interTile()
 {
     printf("+");
@@ -23,70 +37,82 @@ static void interTile()
 }
 
 
-void printLineHouses(color house1, color house2, gameState *game)
+void colorHouse(color_t house)
 {
-    printf(RESET_ANSI"+----+----+----+");
-
-    
     printf(B_YELLOW_ANSI"  "RESET_ANSI);
-    for (int i = 1; i < 4*SIZE_TILE; i++)
+    switch (house)
     {
-        switch (house1)
-        {
-        case red:
+    case red:
+        for (int i = 1; i < 4*SIZE_TILE; i++)
             printf(B_RED_ANSI"  "RESET_ANSI);
-            break;
-        case yellow:
+        break;
+    case yellow:
+        for (int i = 1; i < 4*SIZE_TILE; i++)
             printf(B_YELLOW_ANSI"  "RESET_ANSI);
-            break;
-        case yellow:
-            printf(B_YELLOW_ANSI"  "RESET_ANSI);
-            break;
-        case yellow:
-            printf(B_YELLOW_ANSI"  "RESET_ANSI);
-            break;
-        default:
-            printf("err print_line_houses");
-            break;
-        }
+        break;
+    case green:
+        for (int i = 1; i < 4*SIZE_TILE; i++)
+            printf(B_GREEN_ANSI"  "RESET_ANSI);
+        break;
+    case blue:
+        for (int i = 1; i < 4*SIZE_TILE; i++)
+            printf(B_BLUE_ANSI"  "RESET_ANSI);
+        break;
+    default:
+        printf("err print_line_houses");
+        break;
     }
+}
 
+
+
+void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNum)
+{
+    //printf(RESET_ANSI"+----+----+----+");
+    //int table[16][3] = {
+    //    {0, 67, 66}, {}
+    //}
+    
+    colorHouse(house1);
 
     //for (int i = 0; i < 3; i++)
-    printf(RESET_ANSI"|%-2d %s", 0, r);
-    printf(RESET_ANSI"|%-2d %s", 0, r);
-    printf(RESET_ANSI"|%-2d %s", 0, r);
+    // totalHorseCount(game, case) == 5 ? 
+    printf(RESET_ANSI"|%-2d  ", lineNum+1);
+    if (lineNum == 0)
+    {
+        ;
+    }
+    else if (lineNum == -1)
+    {
+        ;
+    }
+    else if (lineNum < 25)
+        printf(B_YELLOW_ANSI"|    ");
+    else printf(  B_RED_ANSI"|    ");
+    
+
+    printf(RESET_ANSI"|%-2d  ", -10);
     printf(RESET_ANSI"|");
     
 
-    
-    printf(B_GREEN_ANSI"  "RESET_ANSI);
-    for (int i = 1; i < 4*SIZE_TILE; i++)
-    {
-        if (i-1 < game->b.greenHouse)
-        {
-            printf("%s ", g);
-        }
-        else printf(B_GREEN_ANSI"  "RESET_ANSI);
-    }
+    colorHouse(house2);
 
     printf("\n");
 
-    for (int i = 0; i < 8*SIZE_TILE; i++)
-    {
-        printf(B_YELLOW_ANSI" "RESET_ANSI);
-    }
+    colorHouse(house1);
 
-    printf(RESET_ANSI"|%s%s%s%s", r,r,r,r);
-    printf(RESET_ANSI"|%s%s%s%s", r,r,r,r);
-    printf(RESET_ANSI"|%s%s%s%s", r,r,r,r);
+    //for (int i = 0; i < 8*SIZE_TILE; i++)
+    //{
+    //    printf(B_YELLOW_ANSI" "RESET_ANSI);
+    //}
+
+    printf(RESET_ANSI"| %s %s ", r,r);
+    printf(RESET_ANSI"| %s %s ", r,r);
+    printf(RESET_ANSI"| %s %s ", r,r);
     printf(RESET_ANSI"|");
 
+    colorHouse(house2);
 
-    for (int i = 0; i < 8*SIZE_TILE; i++)
-    {
-        printf(B_GREEN_ANSI" "RESET_ANSI);
-    }
     printf("\n"); //21+1
 
 }
@@ -111,18 +137,7 @@ void printBoard(gameState *game)
         tmp[i] = empty;
     }
 
-#ifdef USE_ANSI
-    char r[] = RED_ANSI"♞"RESET_ANSI;
-    char b[] = BLUE_ANSI"♞"RESET_ANSI;
-    char y[] = YELLOW_ANSI"♞"RESET_ANSI;
-    char g[] = GREEN_ANSI"♞"RESET_ANSI;
-#endif
-#ifndef USE_ANSI
-    char r[] = RED_ANSI"r"RESET_ANSI;
-    char b[] = BLUE_ANSI"b"RESET_ANSI;
-    char y[] = YELLOW_ANSI"j"RESET_ANSI;
-    char g[] = GREEN_ANSI"v"RESET_ANSI;
-#endif
+
 
     tmp[3] = r;
             

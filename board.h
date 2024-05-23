@@ -46,7 +46,7 @@ int isRefuge(int pos);
 // Indique si il y a un barrage à la position donnée
 color_t barrageAtPos(board_t, int pos);
 
-// Retourne lee nombre total de chevaux à une case donnée
+// Retourne le nombre total de chevaux à une case donnée
 int totalHorseCount(board_t, int pos);
 // Cette fonction doit être appelée uniquement dans le cas où totalHorseCount(pos) == 1 !!
 color_t getSingleHorseAt(board_t, int pos);
