@@ -53,6 +53,6 @@ typedef struct {
 
 int isRefuge(board_t, int pos);
 color_t barrageAtPos(board_t, int pos);
-bool isMovePossible(board_t, int pos, color_t curHorseColor);
+int isMovePossible(board_t, int pos, color_t curHorseColor);
 
 #endif
