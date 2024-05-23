@@ -54,6 +54,6 @@ color_t getSingleHorseAt(board_t, int pos);
 // Fait en sorte que la position reste entre 0 et BOARD_SIZE
 int wrapAroundPos(int pos);
 // Retourne la couleur du potentiel cheval mangé, ou -1 si le coup ne peut pas être joué
-color_t isMovePossible(board_t, int startPos, int diceRoll, color_t curHorseColor);
+color_t isMovePossible(board_t, int startPos, int diceRoll, color_t curHorseColor, int* barrageCreated);
 
 #endif
