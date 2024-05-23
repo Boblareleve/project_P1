@@ -14,14 +14,15 @@ void initGameState(gameState* game)
         game->numPlayers=getInput(int,"Saisisez le nombre de joueurs");
     }
     game->curPlayer='b';
-    for(int i=0;i<BOARD_SIZE;i++)
+    for(int i = 0; i < BOARD_SIZE; i++)
     {
         game->b.bBoard[i].yellowCount=0;
         game->b.bBoard[i].greenCount=0;
         game->b.bBoard[i].blueCount=0;
         game->b.bBoard[i].redCount=0;
     }
-    for (int i=0;i<7;i++)
+    
+    for (int i = 0;i < 7; i++)
     {
         game->b.yellowfinishLine[i].yellowCount=0;
         game->b.yellowfinishLine[i].greenCount=0;
