@@ -3,7 +3,7 @@
 
 
 
-int get_input(input_t type_dinput, char *msg)
+int getInput(input_t type_dinput, char *msg)
 {
     
 
