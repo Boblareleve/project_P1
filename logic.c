@@ -51,7 +51,7 @@ void initGameState(gameState* game)
 }
 color_t nextPlayer(gameState* player)
 {
-    
+    player->curPlayer=
     
 }
 
