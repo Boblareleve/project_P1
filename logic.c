@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <time.h>
 #include "board.h"
+#include "input.h"
 
 
 void initGameState(gameState* game)
@@ -52,7 +53,7 @@ void initGameState(gameState* game)
 }
 color_t nextPlayer(gameState* player)
 {
-    if (player.numPlayers=4)
+    if (player->numPlayers=4)
     {
 
         switch  (player->curPlayer)
@@ -74,7 +75,7 @@ color_t nextPlayer(gameState* player)
         }
     }
     //renvoie le joueur prochain en tenant compte que 4 personnes jouent
-    if (player.numPlayers=3)
+    if (player->numPlayers=3)
     {
         switch  (player->curPlayer)
         {
@@ -92,7 +93,7 @@ color_t nextPlayer(gameState* player)
         }
     }
     //renvoie le joueur prochain en tenant compte que 3 personnes jouent
-    if (player.numPlayers=2)
+    if (player->numPlayers=2)
     {
         switch  (player->curPlayer)
         {

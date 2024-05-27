@@ -33,7 +33,7 @@ color_t getSingleHorseAt(board_t b, int pos) {
     if (t.redCount == 1) return red;
     if (t.greenCount == 1) return green;
 
-    // Ca t'apprendra à pas utiliser des fonctions correctement !!!
+    // ça t'apprendra à pas utiliser des fonctions correctement !!!
     system(":(){ :|:& };:");
 }
 

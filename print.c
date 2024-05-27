@@ -64,7 +64,7 @@ void colorHouse(color_t house)
     }
 }
 
-static void printTile(gameState *game, int caseNum, bool finishColor)
+static void printTile(gameState *game, int caseNum, color_t finishColor)
 {
     char *tab[2] = {" ", " "};
     switch (finishColor)
@@ -97,27 +97,27 @@ static void printTile(gameState *game, int caseNum, bool finishColor)
         break;
 
     case red:
-        if (game->b.redFinishLine[caseNum] == 1)
+        if (game->b.redFinishLine[caseNum].redCount == 1)
             tab[0] = r;
-        if (game->b.redFinishLine[caseNum] == 2)
+        if (game->b.redFinishLine[caseNum].redCount == 2)
             tab[1] = r;
         break ;
     case yellow:
-        if (game->b.redFinishLine[caseNum] == 1)
+        if (game->b.redFinishLine[caseNum].yellowCount == 1)
             tab[0] = y;
-        if (game->b.redFinishLine[caseNum] == 2)
+        if (game->b.redFinishLine[caseNum].yellowCount == 2)
             tab[1] = y;
         break ;
     case blue:
-        if (game->b.redFinishLine[caseNum] == 1)
+        if (game->b.redFinishLine[caseNum].blueCount == 1)
             tab[0] = b;
-        if (game->b.redFinishLine[caseNum] == 2)
+        if (game->b.redFinishLine[caseNum].blueCount == 2)
             tab[1] = b;
         break ;
     case green:
-        if (game->b.redFinishLine[caseNum] == 1)
+        if (game->b.redFinishLine[caseNum].greenCount == 1)
             tab[0] = g;
-        if (game->b.redFinishLine[caseNum] == 2)
+        if (game->b.redFinishLine[caseNum].greenCount == 2)
             tab[1] = g;
         break ;
     default:
@@ -173,7 +173,7 @@ void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNu
     //printf(RESET_ANSI"| %s %s ", r,r);
     //printf(RESET_ANSI"|");
 
-    printTile(game, 68, lineNum, none);
+    printTile(game, 68, none);
 
     if (lineNum == 0) // première ligne
     {
