@@ -50,6 +50,8 @@ color_t barrageAtPos(board_t, int pos);
 int totalHorseCount(board_t, int pos);
 // Cette fonction doit être appelée uniquement dans le cas où totalHorseCount(pos) == 1 !!
 color_t getSingleHorseAt(board_t, int pos);
+// Si le cheval
+int shouldHorseGetInFinalLine(board_t, int pos, int diceRoll, int* finalLineIndex)
 
 // Fait en sorte que la position reste entre 0 et BOARD_SIZE
 int wrapAroundPos(int pos);
