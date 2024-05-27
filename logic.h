@@ -13,7 +13,8 @@ typedef struct {
 void initGameState(gameState*);
 //initialise le jeu
 color_t nextPlayer(gameState*);
-//passe au joueur prochain
+//renvoie la couleur du joueur prochain
+//ordre:jaune,vert,rouge,bleu
 int diceRoll();
 //simule le lancé de dé
 

@@ -13,6 +13,7 @@
 typedef enum 
 {
     YesNo,
+    integer,
 
 } input_t;
 
