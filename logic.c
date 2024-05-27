@@ -73,6 +73,7 @@ color_t nextPlayer(gameState* player)
                 return none;
         }
     }
+    //renvoie le joueur prochain en tenant compte que 4 personnes jouent
     if (player.numPlayers=3)
     {
         switch  (player->curPlayer)
@@ -90,6 +91,7 @@ color_t nextPlayer(gameState* player)
                 return none;
         }
     }
+    //renvoie le joueur prochain en tenant compte que 3 personnes jouent
     if (player.numPlayers=2)
     {
         switch  (player->curPlayer)
@@ -104,6 +106,7 @@ color_t nextPlayer(gameState* player)
                 return none;
         }
     }
+    //renvoie le joueur prochain en tenant compte que 2 personnes jouent
 }
 
 int diceRoll()
