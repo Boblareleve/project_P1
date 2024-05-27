@@ -5,14 +5,16 @@
 
 typedef struct {
 	int numPlayers;
-	color curPlayer;
-	board b;
+	color_t curPlayer;
+	board_t b;
 	
 } gameState;
 
 void initGameState(gameState*);
-color nextPlayer(gameState*);
-
+//initialise le jeu
+color_t nextPlayer(gameState*);
+//passe au joueur prochain
 int diceRoll();
+//simule le lancé de dé
 
 #endif

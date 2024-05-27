@@ -28,6 +28,17 @@ int getInput(input_t type_dinput, char *msg)
 
         return (input[0] == 'y');
 
+    case integer:
+        printf("%s", msg);
+        scanf("%99s", input);
+        if (input[0] == 'q')
+        {
+            printf("quitte le jeu\n");
+            exit(0);
+        }
+        return (atoi(input));
+
+
     default:
         return -1;
     }

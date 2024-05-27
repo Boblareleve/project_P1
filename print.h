@@ -31,7 +31,7 @@
 #define SIZE_TILE 9
 
 
-void printBoard();
+void printBoard(gameState *game);
 
 
 #endif

@@ -25,7 +25,14 @@ typedef enum {
 typedef struct {
 	FOUR_COLORS(int, Count)
 } tile_t;
-
+/*
+typedef struct {
+	int yellowCount;
+	int redCount;
+	int blueCount;
+	int greenCount;
+} tile_t;
+*/
 
 typedef struct {
 	union {
@@ -35,7 +42,7 @@ typedef struct {
 		tile_t bBoard[BOARD_SIZE];
 	};
 
-	FOUR_COLORS(tile_t, finishLine[7])
+	FOUR_COLORS(tile_t, FinishLine[7])
 
 	FOUR_COLORS(int, House)
 	FOUR_COLORS(int, Finish)
@@ -46,7 +53,7 @@ int isRefuge(int pos);
 // Indique si il y a un barrage à la position donnée
 color_t barrageAtPos(board_t, int pos);
 
-// Retourne lee nombre total de chevaux à une case donnée
+// Retourne le nombre total de chevaux à une case donnée
 int totalHorseCount(board_t, int pos);
 // Cette fonction doit être appelée uniquement dans le cas où totalHorseCount(pos) == 1 !!
 color_t getSingleHorseAt(board_t, int pos);
@@ -57,5 +64,7 @@ int shouldHorseGetInFinalLine(board_t, int pos, int diceRoll, int* finalLineInde
 int wrapAroundPos(int pos);
 // Retourne la couleur du potentiel cheval mangé, ou -1 si le coup ne peut pas être joué
 color_t isMovePossible(board_t, int startPos, int diceRoll, color_t curHorseColor, int* barrageShouldBeCreated);
+
+
 
 #endif
