@@ -14,7 +14,6 @@
 #define B_YELLOW_ANSI "\e[43m"
 #define B_RED_ANSI "\e[41m"
 #define B_GREEN_ANSI "\e[42m"
-
 #define RED_ANSI "\e[31m"
 #define GREEN_ANSI "\e[32m"
 #define YELLOW_ANSI "\e[33m"

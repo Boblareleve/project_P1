@@ -8,6 +8,8 @@ typedef char horse_t;
 
 #define YELLOW_HOUSE 
 
+#include <stdbool.h>
+
 #define FOUR_COLORS(type, name) \
 	type yellow##name; \
 	type blue##name; \
@@ -49,7 +51,7 @@ typedef struct {
 } board_t;
 
 // Indique si la case est un refuge (indépendant de l'état du jeu)
-int isRefuge(int pos);
+bool isRefuge(board_t, int pos);
 // Indique si il y a un barrage à la position donnée
 color_t barrageAtPos(board_t, int pos);
 
@@ -57,11 +59,13 @@ color_t barrageAtPos(board_t, int pos);
 int totalHorseCount(board_t, int pos);
 // Cette fonction doit être appelée uniquement dans le cas où totalHorseCount(pos) == 1 !!
 color_t getSingleHorseAt(board_t, int pos);
+// Si le cheval
+int shouldHorseGetInFinalLine(board_t, int pos, int diceRoll, int* finalLineIndex)
 
 // Fait en sorte que la position reste entre 0 et BOARD_SIZE
 int wrapAroundPos(int pos);
 // Retourne la couleur du potentiel cheval mangé, ou -1 si le coup ne peut pas être joué
-color_t isMovePossible(board_t, int startPos, int diceRoll, color_t curHorseColor, int* barrageShouldBeCreated);
+bool isMovePossible(board_t, int startPos, int diceRoll, color_t curHorseColor, int* barrageShouldBeCreated);
 
 
 

@@ -30,7 +30,7 @@ int main()
     //    printf("#");
     //printf("\n");
     gameState game;
-    print_board(&game);
+    printBoard(&game);
     return (1);
 
     printf("Bonjour bienvenu\n");
@@ -39,7 +39,7 @@ int main()
     char input[10];
     do
     {
-        get_input(YesNo, "commencer une partie ? (yes/no)\n");
+        getInput(YesNo, "commencer une partie ? (yes/no)\n");
         
 
     } while (continue_play);
