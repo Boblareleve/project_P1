@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <stdio.h>
 #include <time.h>
-#include <board.h>
+#include "board.h"
 
 
 void initGameState(gameState* game)
 {
-    game.numPlayers=getInput(integer,"Saisisez le nombre de joueurs");
+    game->numPlayers=getInput(integer,"Saisisez le nombre de joueurs");
     while ((game->numPlayers<2) || (game->numPlayers>4))
     {
         printf("Erreur, nombre de joueurs invalide. Le nombre de joueurs possible est de 2 à 4\n");

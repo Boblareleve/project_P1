@@ -81,11 +81,11 @@ void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNu
 
     if (lineNum == 0) // première ligne
     {
-        pritnf(RESET_ANSI"|%-2d  |", 68);
+        printf(RESET_ANSI"|%-2d  |", 68);
     }
     else if (lineNum == 32) // dernière ligne
     {
-        pritnf(RESET_ANSI"|%-2d  |", 34);
+        printf(RESET_ANSI"|%-2d  |", 34);
     }
     else if (lineNum < 25)
         printf(B_YELLOW_ANSI"| %s  |");
@@ -217,7 +217,7 @@ void printBoard(gameState *game)
     
 
     
-    print_line_houses(yellow, green, game);
+    printLineHouses(yellow, green, game, 0);
     
 
     
