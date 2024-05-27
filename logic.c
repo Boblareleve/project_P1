@@ -13,7 +13,8 @@ void initGameState(gameState* game)
         printf("Erreur, nombre de joueurs invalide. Le nombre de joueurs possible est de 2 à 4\n");
         game->numPlayers=getInput(integer,"Saisisez le nombre de joueurs");
     }
-    game->curPlayer='b';
+
+    game->curPlayer=yellow;
 
     // initialise les cases principales
     for(int i = 0; i < BOARD_SIZE; i++)
@@ -51,8 +52,58 @@ void initGameState(gameState* game)
 }
 color_t nextPlayer(gameState* player)
 {
-    player->curPlayer=
-    
+    if (player.numPlayers=4)
+    {
+
+        switch  (player->curPlayer)
+        {
+            case yellow:
+                return green;
+                break ;
+            case green:
+                return red;
+                break;
+            case red:
+                return blue;
+                break;
+            case blue:
+                return yellow;
+                break;
+            default:
+                return none;
+        }
+    }
+    if (player.numPlayers=3)
+    {
+        switch  (player->curPlayer)
+        {
+            case yellow:
+                return green;
+                break ;
+            case green:
+                return red;
+                break;
+            case red:
+                return yellow;
+                break;
+            default:
+                return none;
+        }
+    }
+    if (player.numPlayers=2)
+    {
+        switch  (player->curPlayer)
+        {
+            case yellow:
+                return green;
+                break ;
+            case green:
+                return yellow;
+                break;
+            default:
+                return none;
+        }
+    }
 }
 
 int diceRoll()
