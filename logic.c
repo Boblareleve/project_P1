@@ -7,22 +7,27 @@
 
 void initGameState(gameState* game)
 {
-    game.numPlayers=getInput(int,"Saisisez le nombre de joueurs");
+    game.numPlayers=getInput(integer,"Saisisez le nombre de joueurs");
     while ((game->numPlayers<2) || (game->numPlayers>4))
     {
         printf("Erreur, nombre de joueurs invalide. Le nombre de joueurs possible est de 2 à 4\n");
-        game->numPlayers=getInput(int,"Saisisez le nombre de joueurs");
+        game->numPlayers=getInput(integer,"Saisisez le nombre de joueurs");
     }
     game->curPlayer='b';
+
+    // initialise les cases principales
     for(int i = 0; i < BOARD_SIZE; i++)
     {
-        game->b.bBoard[i].yellowCount=0;
-        game->b.bBoard[i].greenCount=0;
-        game->b.bBoard[i].blueCount=0;
-        game->b.bBoard[i].redCount=0;
+        game->b.bBoard[i] = {
+            .yellowCount=0,
+            .greenCount=0,
+            .blueCount=0,
+            .redCount=0,
+        }
     }
 
-
+    // init les lignes de fin
+    // comprend 4 couleur par ligne, même si 3 inutile
     for (int i = 0;i < 7; i++)
     {
         game->b.yellowFinishLine[i].yellowCount=0;
