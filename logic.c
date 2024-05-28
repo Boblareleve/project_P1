@@ -1,13 +1,18 @@
 #include "logic.h"
-#include <stdio.h>
-#include <stdio.h>
-#include <time.h>
 #include "board.h"
 #include "input.h"
 
+#include <stdio.h>
+#include <string.h>
+
+// Pour importer la fonction sleep
+#include <unistd.h>
 
 void initGameState(gameState* game)
 {
+    // Initialise tout le plateau à 0
+    memset(game->b, 0, sizeof(board_t));
+
     game->numPlayers=getInput(integer,"Saisisez le nombre de joueurs");
     while ((game->numPlayers<2) || (game->numPlayers>4))
     {
@@ -16,104 +21,29 @@ void initGameState(gameState* game)
     }
 
     game->curPlayer=yellow;
-
-    // initialise les cases principales
-    for(int i = 0; i < BOARD_SIZE; i++)
-    {
-        game->b.bBoard[i].yellowCount=0;
-        game->b.bBoard[i].greenCount=0;
-        game->b.bBoard[i].blueCount=0;
-        game->b.bBoard[i].redCount=0;
-    }
-
-    // init les lignes de fin
-    // comprend 4 couleur par ligne, même si 3 inutile
-    for (int i = 0;i < 7; i++)
-    {
-        game->b.yellowFinishLine[i].yellowCount=0;
-        game->b.yellowFinishLine[i].greenCount=0;
-        game->b.yellowFinishLine[i].redCount=0;
-        game->b.yellowFinishLine[i].blueCount=0;
-        game->b.blueFinishLine[i].blueCount=0;
-        game->b.blueFinishLine[i].greenCount=0;
-        game->b.blueFinishLine[i].redCount=0;
-        game->b.blueFinishLine[i].yellowCount=0;
-        game->b.greenFinishLine[i].yellowCount=0;
-        game->b.greenFinishLine[i].redCount=0;
-        game->b.greenFinishLine[i].greenCount=0;
-        game->b.greenFinishLine[i].blueCount=0;
-        game->b.redFinishLine[i].blueCount=0;
-        game->b.redFinishLine[i].greenCount=0;
-        game->b.redFinishLine[i].redCount=0;
-        game->b.redFinishLine[i].yellowCount=0;
-    }
-
 }
-color_t nextPlayer(gameState* player)
-{
-    if ((player->numPlayers)==4)
-    {
 
-        switch  (player->curPlayer)
-        {
-            case yellow:
-                return green;
-                break ;
-            case green:
-                return red;
-                break;
-            case red:
-                return blue;
-                break;
-            case blue:
-                return yellow;
-                break;
-            default:
-                return none;
-        }
+color_t nextPlayer(gameState* game)
+{
+    switch (game->numPlayers) {
+        case yellow: 
+            return green;
+        case green:
+            return (game->numPlayers == 2) ? yellow : red;
+        case red:
+            return (game->numPlayers == 3) ? yellow : blue;
+        case blue:
+            return yellow;
     }
-    //renvoie le joueur prochain en tenant compte que 4 personnes jouent
-    if ((player->numPlayers)==3)
-    {
-        switch  (player->curPlayer)
-        {
-            case yellow:
-                return green;
-                break ;
-            case green:
-                return red;
-                break;
-            case red:
-                return yellow;
-                break;
-            default:
-                return none;
-        }
-    }
-    //renvoie le joueur prochain en tenant compte que 3 personnes jouent
-    if ((player->numPlayers)==2)
-    {
-        switch  (player->curPlayer)
-        {
-            case yellow:
-                return green;
-                break ;
-            case green:
-                return yellow;
-                break;
-            default:
-                return none;
-        }
-    }
-    //renvoie le joueur prochain en tenant compte que 2 personnes jouent
     return none;
 }
 
-int diceRoll()
+int diceRoll(char* playerName)
 {
-    srand(time(NULL));
-    getInput(YesNo,"Voulez-vous lancer le dé?");
-    int result=rand()%6+1;
-    printf("Le nombe obtenu: %d\n",result);
+    printf("%s lance le dé...\n", playerName);
+    sleep(1.5);
+    
+    int result = rand()%6+1;
+    printf("Le nombre obtenu: %d\n",result);
     return result;
 }

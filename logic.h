@@ -15,7 +15,7 @@ void initGameState(gameState*);
 color_t nextPlayer(gameState*);
 //renvoie la couleur du joueur prochain
 //ordre:jaune,vert,rouge,bleu
-int diceRoll();
+int diceRoll(char* playerName);
 //simule le lancé de dé
 
 #endif
