@@ -6,10 +6,6 @@ typedef char horse_t;
 #define BOARD_SIZE 68
 #define HOUSE_SIZE (BOARD_SIZE / 4)
 
-#define YELLOW_HOUSE 
-
-#include <stdbool.h>
-
 #define FOUR_COLORS(type, name) \
 	type yellow##name; \
 	type blue##name; \
@@ -27,14 +23,6 @@ typedef enum {
 typedef struct {
 	FOUR_COLORS(int, Count)
 } tile_t;
-/*
-typedef struct {
-	int yellowCount;
-	int redCount;
-	int blueCount;
-	int greenCount;
-} tile_t;
-*/
 
 typedef struct {
 	union {
@@ -51,7 +39,7 @@ typedef struct {
 } board_t;
 
 // Indique si la case est un refuge (indépendant de l'état du jeu)
-bool isRefuge(board_t, int pos);
+int isRefuge(int pos);
 // Indique si il y a un barrage à la position donnée
 color_t barrageAtPos(board_t, int pos);
 
@@ -65,7 +53,7 @@ int shouldHorseGetInFinalLine(board_t, int pos, int diceRoll, int* finalLineInde
 // Fait en sorte que la position reste entre 0 et BOARD_SIZE
 int wrapAroundPos(int pos);
 // Retourne la couleur du potentiel cheval mangé, ou -1 si le coup ne peut pas être joué
-bool isMovePossible(board_t, int startPos, int diceRoll, color_t curHorseColor, int* barrageShouldBeCreated);
+color_t isMovePossible(board_t, int startPos, int diceRoll, color_t curHorseColor, int* barrageShouldBeCreated);
 
 
 
