@@ -20,6 +20,16 @@ color_t barrageAtPos(board_t b, int pos) {
     return none;
 }
 
+int inFrontOfStairs(color_t horse, int pos) {
+    switch (horse) {
+        case yellow: return (pos == 67);
+        case blue: return (pos == 16);
+        case red: return (pos == 33);
+        case green: return (pos == 50);
+    }
+    return 0;
+}
+
 int totalHorseCount(board_t b, int pos) {
     tile_t t = b.bBoard[pos];
     return t.yellowCount + t.blueCount + t.redCount + t.greenCount;
@@ -41,19 +51,26 @@ int wrapAroundPos(int pos) {
     return pos % (BOARD_SIZE - 1);
 }
 
-color_t isMovePossible(board_t b, int startPos, int diceRoll, color_t curHorseColor, int* barrageShouldBeCreated) {
+color_t isMovePossible(board_t b, int startPos, int diceRoll, color_t curHorseColor, int* barrageShouldBeCreated, int* entersFinalLineAt) {
     int curPos = startPos;
     int endPos = wrapAroundPos(startPos + diceRoll);
     tile_t curTile;
     int total;
 
     *barrageShouldBeCreated = 0;
+    *entersFinalLineAt = 0;
 
     while (curPos != endPos) {
         curTile = b.bBoard[curPos];
         total = totalHorseCount(b, curPos);
 
         if (total == 2 && barrageAtPos(b, curPos)) break;
+
+        if (inFrontOfStairs(curHorseColor, curPos) && curPos != endPos) {
+            // Le cheval est devant son escalier et doit avancer dedans
+            *entersFinalLineAt = endPos - curPos; // Le nombre de pas restants
+            return none;
+        }
 
         curPos = wrapAroundPos(curPos + 1);
     }
