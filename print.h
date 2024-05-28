@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "board.h"
+#include "logic.h"
 
 
 #define B_BLUE_ANSI "\e[44m"
