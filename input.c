@@ -24,7 +24,7 @@ int getInput(input_t type_dinput, char *msg)
                 exit(0);
             }
 
-        } while ((strcmp(input, "yes") != 0) && (strcmp(input, "no") != 0));
+        } while ((strcmp(input, "oui") != 0) && (strcmp(input, "non") != 0));
 
         return (input[0] == 'y');
 

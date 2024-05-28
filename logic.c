@@ -20,12 +20,10 @@ void initGameState(gameState* game)
     // initialise les cases principales
     for(int i = 0; i < BOARD_SIZE; i++)
     {
-        game->b.bBoard[i] = {
-            .yellowCount=0,
-            .greenCount=0,
-            .blueCount=0,
-            .redCount=0,
-        }
+        game->b.bBoard[i].yellowCount=0;
+        game->b.bBoard[i].greenCount=0;
+        game->b.bBoard[i].blueCount=0;
+        game->b.bBoard[i].redCount=0;
     }
 
     // init les lignes de fin
@@ -118,4 +116,3 @@ int diceRoll()
     printf("Le nombe obtenu: %d\n",result);
     return result;
 }
-
