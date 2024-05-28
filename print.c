@@ -17,10 +17,10 @@
 
 
 #ifdef USE_ANSI
-    char r[] = RED_ANSI"♞"RESET_ANSI;
-    char b[] = BLUE_ANSI"♞"RESET_ANSI;
-    char y[] = YELLOW_ANSI"♞"RESET_ANSI;
-    char g[] = GREEN_ANSI"♞"RESET_ANSI;
+    char r[] = RED_ANSI"♞"; //RESET_ANSI;
+    char b[] = BLUE_ANSI"♞";//RESET_ANSI;
+    char y[] = YELLOW_ANSI"♞";//RESET_ANSI;
+    char g[] = GREEN_ANSI"♞";//RESET_ANSI;
 #endif
 #ifndef USE_ANSI
     char r[] = RED_ANSI"r"RESET_ANSI;
@@ -97,33 +97,33 @@ static void printTile(gameState *game, int caseNum, color_t finishColor)
         break;
 
     case red:
-        if (game->b.redFinishLine[caseNum].redCount == 1)
+        if (game->b.finishLine[caseNum].redCount >= 1)
             tab[0] = r;
-        if (game->b.redFinishLine[caseNum].redCount == 2)
+        if (game->b.finishLine[caseNum].redCount == 2)
             tab[1] = r;
         break ;
     case yellow:
-        if (game->b.redFinishLine[caseNum].yellowCount == 1)
+        if (game->b.finishLine[caseNum].yellowCount >= 1)
             tab[0] = y;
-        if (game->b.redFinishLine[caseNum].yellowCount == 2)
+        if (game->b.finishLine[caseNum].yellowCount == 2)
             tab[1] = y;
         break ;
     case blue:
-        if (game->b.redFinishLine[caseNum].blueCount == 1)
+        if (game->b.finishLine[caseNum].blueCount >= 1)
             tab[0] = b;
-        if (game->b.redFinishLine[caseNum].blueCount == 2)
+        if (game->b.finishLine[caseNum].blueCount == 2)
             tab[1] = b;
         break ;
     case green:
-        if (game->b.redFinishLine[caseNum].greenCount == 1)
+        if (game->b.finishLine[caseNum].greenCount >= 1)
             tab[0] = g;
-        if (game->b.redFinishLine[caseNum].greenCount == 2)
+        if (game->b.finishLine[caseNum].greenCount == 2)
             tab[1] = g;
         break ;
     default:
         break;
     }
-    printf(" %s%s ", tab[0], tab[1]);
+    printf(" %s%s "RED_ANSI, tab[0], tab[1]);
 }
 
 void printPlus(color_t c)
@@ -156,8 +156,6 @@ void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNu
     //    {0, 67, 66}, {}
     //}
 
-
-    
     printf("\n");
 
     colorHouse(house1);
@@ -219,7 +217,7 @@ void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNu
     else if (lineNum < 10)
     {
         printf(B_YELLOW_ANSI "|");
-        printTile(game, 0, yellow);
+        printTile(game, lineNum - 1, yellow);
     }
     else 
     {
