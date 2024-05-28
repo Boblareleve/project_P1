@@ -20,4 +20,7 @@ void nextPlayer(gameState*);
 // simule le lancé de dé
 int diceRoll(char* playerName);
 
+// lance la partie
+void play();
+
 #endif
