@@ -42,18 +42,19 @@ typedef struct {
 int isRefuge(int pos);
 // Indique si il y a un barrage à la position donnée
 color_t barrageAtPos(board_t, int pos);
+// Retourne 1 si le cheval est devant l'escalier de sa couleur, 0 sinon
+int inFrontOfStairs(color_t horse, int pos);
 
 // Retourne le nombre total de chevaux à une case donnée
 int totalHorseCount(board_t, int pos);
 // Cette fonction doit être appelée uniquement dans le cas où totalHorseCount(pos) == 1 !!
 color_t getSingleHorseAt(board_t, int pos);
-// Si le cheval
-int shouldHorseGetInFinalLine(board_t, int pos, int diceRoll, int* finalLineIndex);
-
 // Fait en sorte que la position reste entre 0 et BOARD_SIZE
 int wrapAroundPos(int pos);
 // Retourne la couleur du potentiel cheval mangé, ou -1 si le coup ne peut pas être joué
-color_t isMovePossible(board_t, int startPos, int diceRoll, color_t curHorseColor, int* barrageShouldBeCreated);
+// barrageShouldBeCreated retourne 1 si un barrage doit être créé à la position finale
+// entersHouseAt retourne la position à laquelle le cheval entre dans la dernière ligne, -1 si il ne rentre pas dans la dernière ligne
+color_t isMovePossible(board_t, int startPos, int diceRoll, color_t curHorseColor, int* barrageShouldBeCreated, int* entersFinalLineAt);
 
 
 
