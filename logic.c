@@ -11,7 +11,7 @@
 void initGameState(gameState* game)
 {
     // Initialise tout le plateau à 0
-    memset(game->b, 0, sizeof(board_t));
+    memset(&game->b, 0, sizeof(board_t));
 
     game->numPlayers=getInput(integer,"Saisisez le nombre de joueurs");
     while ((game->numPlayers<2) || (game->numPlayers>4))
