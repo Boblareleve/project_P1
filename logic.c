@@ -56,7 +56,7 @@ int diceRoll(char* playerName)
 }
 
 color_t hasPlayerWon(gameState* game) {
-    board* b = &game->b;
+    board_t* b = &(game->b);
 
     if (b->yellowFinish == 4) return yellow;
     if (b->blueFinish == 4) return blue;
@@ -75,5 +75,5 @@ void play() {
 
         nextPlayer(&game);
     }
-    while (hasPlayerWon(game) == none); // A remplacer plus tard
+    while (hasPlayerWon(&game) == none); // A remplacer plus tard
 }
