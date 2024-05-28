@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
+#include <time.h>
 #include "input.h"
 #include "print.h"
 #include "logic.h"
@@ -29,6 +29,7 @@ int main()
     //for (int i = 0; i < 19 * 9; i++)
     //    printf("#");
     //printf("\n");
+    srand(time(NULL));
     gameState game;
     printBoard(&game);
     return (1);
