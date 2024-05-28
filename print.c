@@ -39,23 +39,22 @@ static void interTile()
 
 void colorHouse(color_t house)
 {
-    printf(B_YELLOW_ANSI"  "RESET_ANSI);
     switch (house)
     {
     case red:
-        for (int i = 1; i < 4*SIZE_TILE; i++)
+        for (int i = 1; i < 4*SIZE_TILE+1; i++)
             printf(B_RED_ANSI"  "RESET_ANSI);
         break;
     case yellow:
-        for (int i = 1; i < 4*SIZE_TILE; i++)
+        for (int i = 1; i < 4*SIZE_TILE+1; i++)
             printf(B_YELLOW_ANSI"  "RESET_ANSI);
         break;
     case green:
-        for (int i = 1; i < 4*SIZE_TILE; i++)
+        for (int i = 1; i < 4*SIZE_TILE+1; i++)
             printf(B_GREEN_ANSI"  "RESET_ANSI);
         break;
     case blue:
-        for (int i = 1; i < 4*SIZE_TILE; i++)
+        for (int i = 1; i < 4*SIZE_TILE+1; i++)
             printf(B_BLUE_ANSI"  "RESET_ANSI);
         break;
     default:
@@ -123,7 +122,7 @@ static void printTile(gameState *game, int caseNum, color_t finishColor)
     default:
         break;
     }
-    printf(" %s %s ", tab[0], tab[1]);
+    printf(" %s%s ", tab[0], tab[1]);
 }
 
 void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNum)
@@ -132,27 +131,38 @@ void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNu
     //int table[16][3] = {
     //    {0, 67, 66}, {}
     //}
-    
+
+
     colorHouse(house1);
+    printf(RESET_ANSI"+----+----+----+");
+    colorHouse(house2);
+    printf("\n");
+
+    colorHouse(house1);
+    
 
     //for (int i = 0; i < 3; i++)
     // totalHorseCount(game, case) == 5 ? 
-    printf(RESET_ANSI"|%-2d   ", lineNum+1);
+    if (lineNum < 10)
+        printf(RESET_ANSI"|%-2d  "RESET_ANSI, lineNum+1);
+    else printf(RESET_ANSI"|%-2d  "RESET_ANSI, lineNum+14);
 
     if (lineNum == 0) // première ligne
     {
-        printf(RESET_ANSI"|%-2d   |", 68);
+        printf(RESET_ANSI"|%-2d  |"RESET_ANSI, 68);
     }
-    else if (lineNum == 18) // dernière ligne
+    else if (lineNum == 19) // dernière ligne
     {
-        printf(RESET_ANSI"|%-2d   |", 34);
+        printf(RESET_ANSI"|%-2d  |"RESET_ANSI, 34);
     }
     else if (lineNum < 10)
-        printf(B_YELLOW_ANSI"|     |");
-    else printf(  B_RED_ANSI"|     |");
+        printf(B_YELLOW_ANSI"|    |"RESET_ANSI);
+    else printf(  B_RED_ANSI"|    |"RESET_ANSI);
     
 
-    printf(RESET_ANSI"%-2d   |", 67 - lineNum);
+    if (lineNum < 10)
+        printf(RESET_ANSI"%-2d  |", 67 - lineNum);
+    else printf(RESET_ANSI"%-2d  |", 67-13 - lineNum);
     
     //printf(RESET_ANSI"|");
     
@@ -163,38 +173,33 @@ void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNu
 
     colorHouse(house1);
 
-    //for (int i = 0; i < 8*SIZE_TILE; i++)
-    //{
-    //    printf(B_YELLOW_ANSI" "RESET_ANSI);
-    //}
-
-    //printf(RESET_ANSI"| %s %s ", r,r);
-    //printf(RESET_ANSI"| %s %s ", r,r);
-    //printf(RESET_ANSI"| %s %s ", r,r);
-    //printf(RESET_ANSI"|");
-
+    printf("|");
     printTile(game, 68, none);
 
     if (lineNum == 0) // première ligne
     {
+        printf("|");
         printTile(game, 68, none);
     }
-    else if (lineNum == 18) // dernière ligne
+    else if (lineNum == 19) // dernière ligne
     {
+        printf("|");
         printTile(game, 34, none);
     }
     else if (lineNum < 10)
     {
-        printf(B_YELLOW_ANSI);
+        printf(B_YELLOW_ANSI "|");
         printTile(game, lineNum, yellow);
     }
     else 
     {
-        printf(B_RED_ANSI);
+        printf(B_RED_ANSI"|");
         printTile(game, 17 - lineNum, red);
     }
 
+    printf("|"RESET_ANSI);
     printTile(game, 66 - lineNum, none);
+    printf("|");
     //printf(RESET_ANSI"%-2d  |", 67 - lineNum);
 
 
@@ -206,52 +211,16 @@ void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNu
 
 
 
-
-void printBoard(gameState *game)
-{
     //printf(B_BLUE_ANSI"■♞    ■■\n"B_RESET_ANSI);
     //printf(B_YELLOW_ANSI"■♞    ■■\n");
     //printf(B_RED_ANSI"■♞    ■■\n"B_RESET_ANSI);
     //printf(B_GREEN_ANSI"■♞    ■■\n"B_RESET_ANSI);
     //printf(RESET_ANSI"\n");
-    
 
+void printBoard(gameState *game)
+{
 
-    char empty[] = " ";
-    char *tmp[5]; // not null terminated
-    for (int i = 0; i < 5; i++)
-    {
-        tmp[i] = empty;
-    }
-
-    tmp[3] = r;
-            
-    //printf("\n");
-    //printf("|%02d %s%s%s%s%s", 0, tmp[0], tmp[1], tmp[2], tmp[3], tmp[4]); // 9 char
-
-
-    game->b.yellowHouse = 4;
-    game->b.greenHouse = 4;
-
-    char tab[19][8*9];
-
-    for (int i = 0; i < 8*SIZE_TILE; i++)
-    {
-        printf(B_YELLOW_ANSI" "RESET_ANSI);
-    }
-
-    //for (int i = 0; i < 5*3+1; i++)
-    //    printf(RESET_ANSI" ");
-    printf(RESET_ANSI"+----+----+----+");
-
-    for (int i = 0; i < 8*SIZE_TILE; i++)
-    {
-        printf(B_GREEN_ANSI" "RESET_ANSI);
-    }
-    printf("\n"); //21+1
-
-
-    printf(B_YELLOW_ANSI"  "RESET_ANSI);
+    /*printf(B_YELLOW_ANSI"  "RESET_ANSI);
     for (int i = 1; i < 4*SIZE_TILE; i++)
     {
         if (i-1 < game->b.yellowHouse)
@@ -262,13 +231,6 @@ void printBoard(gameState *game)
     }
 
 
-    //for (int i = 0; i < 3; i++)
-    printf(RESET_ANSI"|%-2d %s", 0, r);
-    printf(RESET_ANSI"|%-2d %s", 0, r);
-    printf(RESET_ANSI"|%-2d %s", 0, r);
-    printf(RESET_ANSI"|");
-    
-
     
     printf(B_GREEN_ANSI"  "RESET_ANSI);
     for (int i = 1; i < 4*SIZE_TILE; i++)
@@ -278,30 +240,22 @@ void printBoard(gameState *game)
             printf("%s ", g);
         }
         else printf(B_GREEN_ANSI"  "RESET_ANSI);
-    }
+    }*/
 
+
+    for (int i = 0; i < 8; i++)
+        printLineHouses(yellow, green, game, i);
+    colorHouse(yellow);
+    printf(RESET_ANSI"+----+----+----+");
+    colorHouse(green);
     printf("\n");
-
-    for (int i = 0; i < 8*SIZE_TILE; i++)
-    {
-        printf(B_YELLOW_ANSI" "RESET_ANSI);
-    }
-
-    printf(RESET_ANSI"|%s%s%s%s", r,r,r,r);
-    printf(RESET_ANSI"|%s%s%s%s", r,r,r,r);
-    printf(RESET_ANSI"|%s%s%s%s", r,r,r,r);
-    printf(RESET_ANSI"|");
-
-
-    for (int i = 0; i < 8*SIZE_TILE; i++)
-    {
-        printf(B_GREEN_ANSI" "RESET_ANSI);
-    }
-    printf("\n"); //21+1
-    
-
-    
-    printLineHouses(yellow, green, game, 0);
+    printf("\n");
+    for (int i = 12; i < 20; i++)
+        printLineHouses(blue, red, game, i);
+    colorHouse(blue);
+    printf(RESET_ANSI"+----+----+----+");
+    colorHouse(red);
+    printf("\n");
     
 
     
