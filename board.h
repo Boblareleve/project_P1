@@ -53,7 +53,7 @@ color_t getSingleHorseAt(board_t, int pos);
 int wrapAroundPos(int pos);
 // Retourne la couleur du potentiel cheval mangé, ou -1 si le coup ne peut pas être joué
 // barrageShouldBeCreated retourne 1 si un barrage doit être créé à la position finale
-// entersHouseAt retourne la position à laquelle le cheval entre dans la dernière ligne, -1 si il ne rentre pas dans la dernière ligne
+// entersFinalLineAt retourne la position à laquelle le cheval entre dans la dernière ligne, 0 si il ne rentre pas dans la dernière ligne
 color_t isMovePossible(board_t, int startPos, int diceRoll, color_t curHorseColor, int* barrageShouldBeCreated, int* entersFinalLineAt);
 
 
