@@ -5,6 +5,7 @@
 
 typedef struct {
 	int numPlayers;
+	char playerNames[100][4];
 	color_t curPlayer;
 	board_t b;
 	
@@ -19,5 +20,11 @@ void nextPlayer(gameState*);
 
 // simule le lancé de dé
 int diceRoll(char* playerName);
+
+//
+color_t hasPlayerWon(gameState*);
+
+// lance la partie
+void play();
 
 #endif
