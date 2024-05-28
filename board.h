@@ -32,7 +32,9 @@ typedef struct {
 		tile_t bBoard[BOARD_SIZE];
 	};
 
-	FOUR_COLORS(tile_t, FinishLine[7])
+	// old version -> FOUR_COLORS(tile_t, FinishLine[7])
+	// rouge de la structure représente les cases rouges...
+	tile_t FinishLine[7]; 
 
 	FOUR_COLORS(int, House)
 	FOUR_COLORS(int, Finish)
