@@ -98,32 +98,38 @@ static void printTile(gameState *game, int caseNum, color_t finishColor)
 
     case red:
         if (game->b.finishLine[caseNum].redCount >= 1)
-            tab[0] = r;
+        {
+            tab[0] = "♞";
+        }
         if (game->b.finishLine[caseNum].redCount == 2)
-            tab[1] = r;
+        {
+            tab[1] = "♞";
+        }
+        
+        //printf("->%s:%s", r, tab[1]);
         break ;
     case yellow:
         if (game->b.finishLine[caseNum].yellowCount >= 1)
-            tab[0] = y;
+            tab[0] = "♞";
         if (game->b.finishLine[caseNum].yellowCount == 2)
-            tab[1] = y;
+            tab[1] = "♞";
         break ;
     case blue:
         if (game->b.finishLine[caseNum].blueCount >= 1)
-            tab[0] = b;
+            tab[0] = "♞";
         if (game->b.finishLine[caseNum].blueCount == 2)
-            tab[1] = b;
+            tab[1] = "♞";
         break ;
     case green:
         if (game->b.finishLine[caseNum].greenCount >= 1)
-            tab[0] = g;
+            tab[0] = "♞";
         if (game->b.finishLine[caseNum].greenCount == 2)
-            tab[1] = g;
+            tab[1] = "♞";
         break ;
     default:
         break;
     }
-    printf(" %s%s "RED_ANSI, tab[0], tab[1]);
+    printf(" %s%s "RESET_ANSI, tab[0], tab[1]);
 }
 
 void printPlus(color_t c)
@@ -198,7 +204,7 @@ void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNu
         printf("|");
         printTile(game, lineNum+1, none);
     }
-    else 
+    else
     {
         printf("|");
         printTile(game, lineNum+14, none);
@@ -208,24 +214,30 @@ void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNu
     {
         printf("|");
         printTile(game, 68, none);
+        printf("|");
     }
     else if (lineNum == 19) // dernière ligne
     {
         printf("|");
         printTile(game, 34, none);
+        printf("|");
     }
     else if (lineNum < 10)
     {
-        printf(B_YELLOW_ANSI "|");
-        printTile(game, lineNum - 1, yellow);
+        printf(B_YELLOW_ANSI"|");
+        //printf("d %d d", lineNum);
+        printTile(game, lineNum, yellow);
+        printf(B_YELLOW_ANSI"|");
     }
     else 
     {
         printf(B_RED_ANSI"|");
-        printTile(game, 17 - lineNum, red);
+        //printf("d %dd", 18 - lineNum);
+        printTile(game, 19 - lineNum, red);
+        printf(B_RED_ANSI"|");
     }
 
-    printf("|"RESET_ANSI);
+    printf(RESET_ANSI);
     if (lineNum < 10)
         printTile(game, 67 - lineNum, none);
     else printTile(game, 67-13 - lineNum, none);
