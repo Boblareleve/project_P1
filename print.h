@@ -29,7 +29,7 @@
 #define USE_ANSI
 
 
-#define SIZE_TILE 9
+#define SIZE_TILE 10
 
 
 void printBoard(gameState *game);
