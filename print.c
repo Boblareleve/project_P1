@@ -23,10 +23,10 @@
     char g[] = GREEN_ANSI"♞";//RESET_ANSI;
 #endif
 #ifndef USE_ANSI
-    char r[] = RED_ANSI"r"RESET_ANSI;
-    char b[] = BLUE_ANSI"b"RESET_ANSI;
-    char y[] = YELLOW_ANSI"j"RESET_ANSI;
-    char g[] = GREEN_ANSI"v"RESET_ANSI;
+    char r[] = "r";
+    char b[] = "b";
+    char y[] = "j";
+    char g[] = "v";
 #endif
 
 static void interTile()
@@ -42,19 +42,19 @@ void colorHouse(color_t house)
     switch (house)
     {
     case red:
-        for (int i = 1; i < 4*SIZE_TILE+2; i++)
+        for (int i = 1; i < 4*SIZE_TILE+1; i++)
             printf(B_RED_ANSI" "RESET_ANSI);
         break;
     case yellow:
-        for (int i = 1; i < 4*SIZE_TILE+2; i++)
+        for (int i = 1; i < 4*SIZE_TILE+1; i++)
             printf(B_YELLOW_ANSI" "RESET_ANSI);
         break;
     case green:
-        for (int i = 1; i < 4*SIZE_TILE+2; i++)
+        for (int i = 1; i < 4*SIZE_TILE+1; i++)
             printf(B_GREEN_ANSI" "RESET_ANSI);
         break;
     case blue:
-        for (int i = 1; i < 4*SIZE_TILE+2; i++)
+        for (int i = 1; i < 4*SIZE_TILE+1; i++)
             printf(B_BLUE_ANSI" "RESET_ANSI);
         break;
     default:
@@ -267,7 +267,7 @@ void linePlus(char *c1, char*c2, int s)
     }
     printf("+");
     printf(RESET_ANSI);
-    for (int i = 0; i < 16; i++)
+    for (int i = 0; i < 14; i++)
         printf(" ");
     printf("%s", c2);
     for (int i = 0; i < s; i++)
@@ -278,55 +278,77 @@ void linePlus(char *c1, char*c2, int s)
     printf(RESET_ANSI);
 }
 
+void printFinish(gameState *game, color_t c, int num)
+{
+    char *tab[2] = {" ", " "};
+    switch (c)
+    {
+    case yellow:
+        tab[0] = (game->b.yellowFinish >= 0+num) ? "♞" : " ";
+        tab[1] = (game->b.yellowFinish >= 1+num) ? "♞" : " ";
+        break;
+    case red:
+        tab[0] = (game->b.redFinish >= 0+num) ? "♞" : " ";
+        tab[1] = (game->b.redFinish >= 1+num) ? "♞" : " ";
+        break;
+    case blue:
+        tab[0] = (game->b.blueFinish >= 0+num) ? "♞" : " ";
+        tab[1] = (game->b.blueFinish >= 1+num) ? "♞" : " ";
+        break;
+    case green:
+        tab[0] = (game->b.greenFinish >= 0+num) ? "♞" : " ";
+        tab[1] = (game->b.greenFinish >= 1+num) ? "♞" : " ";
+        break;
+    default:
+        break;
+    }
+    printf(" %s%s ", tab[0], tab[1]);
+}
 
 void printBoard(gameState *game)
 {
-
-    /*printf(B_YELLOW_ANSI"  "RESET_ANSI);
-    for (int i = 1; i < 4*SIZE_TILE; i++)
-    {
-        if (i-1 < game->b.yellowHouse)
-        {
-            printf("%s ", y);
-        }
-        else printf(B_YELLOW_ANSI"  "RESET_ANSI);
-    }
-
-
-    
-    printf(B_GREEN_ANSI"  "RESET_ANSI);
-    for (int i = 1; i < 4*SIZE_TILE; i++)
-    {
-        if (i-1 < game->b.greenHouse)
-        {
-            printf("%s ", g);
-        }
-        else printf(B_GREEN_ANSI"  "RESET_ANSI);
-    }*/
 
     // up part
     colorHouse(yellow);
     printPlus(none);
     colorHouse(green);
-    for (int i = 0; i < 8; i++)
+    for (int i = 0; i < 7; i++)
     {
         printLineHouses(yellow, green, game, i);
         colorHouse(yellow);
         printPlus(yellow);
         colorHouse(green);
     }
-    printf("\n");
+    printLineHouses(yellow, green, game, 7);
 
     // mid part 1
-    linePlus("","", 8);
+    for (int i = 0; i < 9; i++)
+    {
+        printf("+----");
+    }
+    printf(B_YELLOW_ANSI"+----+"RESET_ANSI);
+    for (int i = 0; i < 9; i++)
+    {
+        printf("----+");
+    }
     printf("\n");
+    
     for (int i = 16; i >= 9; i--)
         printf("| %-2d ", i);
     printf("|");
 
-    //center
-    for (int i = 0; i < 16; i++)
+
+    game->b.yellowFinish = 4;
+    game->b.redFinish = 3;
+    //center 1
+    for (int i = 0; i < 4; i++)
         printf(" ");
+    printf(B_YELLOW_ANSI"|");
+    printFinish(game, yellow, 1);
+    printf("|"RESET_ANSI);
+    for (int i = 0; i < 4; i++)
+        printf(" ");
+
 
     for (int i = 59; i >= 52; i--)
         printf("| %-2d ", i);
@@ -341,9 +363,16 @@ void printBoard(gameState *game)
         printTile(game, i, none);
         printf("|");
     }
-    //center
-    for (int i = 0; i < 16; i++)
+
+    //center 2
+    for (int i = 0; i < 4; i++)
         printf(" ");
+    printf(B_YELLOW_ANSI"|");
+    printFinish(game, yellow, 3);
+    printf("|"RESET_ANSI);
+    for (int i = 0; i < 4; i++)
+        printf(" ");
+
     printf("|");
     for (int i = 59; i >= 52; i--)
     {
@@ -355,11 +384,26 @@ void printBoard(gameState *game)
 
     // finish
     printf("+----");
-    linePlus(B_BLUE_ANSI,B_GREEN_ANSI, 7);
-    printf("----+");
+    printf(B_BLUE_ANSI);
+
+    for (int i = 0; i < 7; i++)
+    {
+        printf("+----");
+    }
+    printf("+"RESET_ANSI);
+
+    //center 3 +-+
+    for (int i = 0; i < 14; i++)
+        printf(" ");
+
+    printf(B_GREEN_ANSI);
+    for (int i = 0; i < 7; i++)
+    {
+        printf("+----");
+    }
+    printf("+"RESET_ANSI"----+\n");
 
 
-    printf("\n");
     printf("| %-2d ", 17);
     printf(B_BLUE_ANSI);
     for (int i = 1; i < 8; i++)
@@ -368,11 +412,15 @@ void printBoard(gameState *game)
         printf("|    ", i);
     }
     printf("|");
+
+    //center 4
+    printFinish(game, blue, 1);
     printf(RESET_ANSI);
-    for (int i = 0; i < 16; i++)
+    for (int i = 0; i < 6; i++)
         printf(" ");
 
     printf(B_GREEN_ANSI);
+    printFinish(game, green, 1);
     for (int i = 7; i >= 1; i--)
     {
         //printf("| %-2d ", i);
@@ -393,10 +441,14 @@ void printBoard(gameState *game)
     }
     printf(B_BLUE_ANSI"|");
 
-
+    //center 5
+    printFinish(game, blue, 2);
     printf(RESET_ANSI);
-    for (int i = 0; i < 16; i++)
+    for (int i = 0; i < 6; i++)
         printf(" ");
+    
+    printf(B_GREEN_ANSI);
+    printFinish(game, green, 2);
 
     for (int i = 7; i >= 1; i--)
     {
@@ -412,15 +464,40 @@ void printBoard(gameState *game)
 
     // mid part 1 num
     printf("+----");
-    linePlus(B_BLUE_ANSI,B_GREEN_ANSI, 7);
-    printf("----+");
-    printf("\n");
+    printf(B_BLUE_ANSI);
+
+    for (int i = 0; i < 7; i++)
+    {
+        printf("+----");
+    }
+
+    printf("+"RESET_ANSI);
+    
+    //center 6 +-+
+    for (int i = 0; i < 14; i++)
+        printf(" ");
+
+    printf(B_GREEN_ANSI);
+    for (int i = 0; i < 7; i++)
+    {
+        printf("+----");
+    }
+    printf("+"RESET_ANSI);
+    printf("----+\n");
+
     for (int i = 18; i < 26; i++)
         printf("| %-2d ", i);
     printf("|");
 
-    for (int i = 0; i < 16; i++)
+    //center 7
+    for (int i = 0; i < 4; i++)
         printf(" ");
+    printf(B_RED_ANSI"|");
+    printFinish(game, red, 1);
+    printf("|"RESET_ANSI);
+    for (int i = 0; i < 4; i++)
+        printf(" ");
+    
     for (int i = 43; i < 51; i++)
         printf("| %-2d ", i);
     printf("|");
@@ -434,9 +511,16 @@ void printBoard(gameState *game)
         printTile(game, i, none);
         printf("|");
     }
-    //center
-    for (int i = 0; i < 16; i++)
+
+    //center 8
+    for (int i = 0; i < 4; i++)
         printf(" ");
+    printf(B_RED_ANSI"|");
+    printFinish(game, red, 3);
+    printf("|"RESET_ANSI);
+    for (int i = 0; i < 4; i++)
+        printf(" ");
+
     printf("|");
     for (int i = 43; i < 51; i++)
     {
@@ -444,19 +528,28 @@ void printBoard(gameState *game)
         printf("|");
     }
     printf("\n");
-    linePlus("","", 8);
-    printf("\n");
 
+    
+    for (int i = 0; i < 9; i++)
+    {
+        printf("+----");
+    }
+    printf(B_RED_ANSI"+----+"RESET_ANSI);
+    for (int i = 0; i < 9; i++)
+    {
+        printf("----+");
+    }
 
 
     // down part
-    for (int i = 12; i < 20; i++)
+    for (int i = 12; i < 19; i++)
     {
+        printLineHouses(blue, red, game, i);
         colorHouse(blue);
         printPlus(red);
         colorHouse(red);
-        printLineHouses(blue, red, game, i);
     }
+    printLineHouses(blue, red, game, 19);
     colorHouse(blue);
     printPlus(none);
     colorHouse(red);
