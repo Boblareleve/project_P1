@@ -36,9 +36,143 @@ static void interTile()
         printf("-");
 }
 
-
-void colorHouse(color_t house)
+void printHouseTile(gameState *game, color_t c, bool numRow)
 {
+    char *tab[] = {" ", " "};
+    switch (c)
+    {
+    case yellow:
+        if (numRow)
+        {
+            if (game->b.yellowHouse >= 3)
+                tab[0] = YELLOW_ANSI"♞";
+            if (game->b.yellowHouse >= 4)
+                tab[1] = YELLOW_ANSI"♞";
+        }
+        else
+        {
+            if (game->b.yellowHouse >= 1)
+                tab[0] = YELLOW_ANSI"♞";
+            if (game->b.yellowHouse >= 2)
+                tab[1] = YELLOW_ANSI"♞";
+        }
+        break;
+    case red:
+        if (numRow)
+        {
+            if (game->b.redHouse >= 3)
+                tab[0] = RED_ANSI"♞";
+            if (game->b.redHouse >= 4)
+                tab[1] = RED_ANSI"♞";
+        }
+        else
+        {
+            if (game->b.redHouse >= 1)
+                tab[0] = RED_ANSI"♞";
+            if (game->b.redHouse >= 2)
+                tab[1] = RED_ANSI"♞";
+        }
+        break;
+    case blue:
+        if (numRow)
+        {
+            if (game->b.blueHouse >= 3)
+                tab[0] = BLUE_ANSI"♞";
+            if (game->b.blueHouse >= 4)
+                tab[1] = BLUE_ANSI"♞";
+        }
+        else
+        {
+            if (game->b.blueHouse >= 1)
+                tab[0] = BLUE_ANSI"♞";
+            if (game->b.blueHouse >= 2)
+                tab[1] = BLUE_ANSI"♞";
+        }
+        break;
+    case green:
+        if (numRow)
+        {
+            if (game->b.greenHouse >= 3)
+                tab[0] = GREEN_ANSI"♞";
+            if (game->b.greenHouse >= 4)
+                tab[1] = GREEN_ANSI"♞";
+        }
+        else
+        {
+            if (game->b.greenHouse >= 1)
+                tab[0] = GREEN_ANSI"♞";
+            if (game->b.greenHouse >= 2)
+                tab[1] = GREEN_ANSI"♞";
+        }
+        break;
+    default:
+        printf("err color\n");
+        break;
+    }
+    printf("  %s%s  "RESET_ANSI, tab[0], tab[1]);
+}
+
+void colorHouse(gameState *game, color_t house, int numLine, bool left)
+{
+    //printf("(%02d)", numLine);
+
+    if (numLine >= 10 && numLine < 14
+     || numLine >= 47 && numLine < 51)
+    {
+        switch (house)
+        {
+        case red:
+            for (int i = 0; i < 17; i++) //4*SIZE_TILE+1; i++)
+                printf(B_RED_ANSI" "RESET_ANSI);
+            if (numLine >= 48 && numLine < 50)
+                printHouseTile(game, red, numLine-48);    
+            else printf("      ");
+            for (int i = 0; i < 17; i++) //4*SIZE_TILE+1; i++)
+                printf(B_RED_ANSI" "RESET_ANSI);
+
+            break;
+        case yellow:
+            for (int i = 0; i < 17; i++) //4*SIZE_TILE+1; i++)
+                printf(B_YELLOW_ANSI" "RESET_ANSI);
+            if (numLine >= 11 && numLine < 13)
+                printHouseTile(game, yellow, numLine-11);    
+            else printf("      ");
+            
+            for (int i = 0; i < 17; i++) //4*SIZE_TILE+1; i++)
+                printf(B_YELLOW_ANSI" "RESET_ANSI);
+            //for (int i = 1; i < 4*SIZE_TILE+1; i++)
+            break;
+        case green:
+            for (int i = 0; i < 17; i++) //4*SIZE_TILE+1; i++)
+                printf(B_GREEN_ANSI" "RESET_ANSI);
+            
+            if (numLine >= 11 && numLine < 13)
+                printHouseTile(game, green, numLine-11);    
+            else printf("      ");
+
+            for (int i = 0; i < 17; i++) //4*SIZE_TILE+1; i++)
+                printf(B_GREEN_ANSI" "RESET_ANSI);
+            //for (int i = 1; i < 4*SIZE_TILE+1; i++)
+            break;
+        case blue:
+            for (int i = 0; i < 17; i++) //4*SIZE_TILE+1; i++)
+                printf(B_BLUE_ANSI" "RESET_ANSI);
+            
+            if (numLine >= 48 && numLine < 50)
+                printHouseTile(game, blue, numLine-48);    
+            else printf("      ");
+            
+            for (int i = 0; i < 17; i++) //4*SIZE_TILE+1; i++)
+                printf(B_BLUE_ANSI" "RESET_ANSI);
+            //for (int i = 1; i < 4*SIZE_TILE+1; i++)
+            break;
+        default:
+            printf("err print_line_houses");
+            break;
+        }
+    }
+    else
+    {
     switch (house)
     {
     case red:
@@ -60,7 +194,7 @@ void colorHouse(color_t house)
     default:
         printf("err print_line_houses");
         break;
-    }
+    }}
 }
 
 static void printTile(gameState *game, int caseNum, color_t finishColor)
@@ -98,15 +232,9 @@ static void printTile(gameState *game, int caseNum, color_t finishColor)
 
     case red:
         if (game->b.finishLine[caseNum].redCount >= 1)
-        {
             tab[0] = "♞";
-        }
         if (game->b.finishLine[caseNum].redCount == 2)
-        {
             tab[1] = "♞";
-        }
-        
-        //printf("->%s:%s", r, tab[1]);
         break ;
     case yellow:
         if (game->b.finishLine[caseNum].yellowCount >= 1)
@@ -164,7 +292,7 @@ void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNu
 
     printf("\n");
 
-    colorHouse(house1);
+    colorHouse(game, house1, lineNum*3+1, true);
     
 
     //for (int i = 0; i < 3; i++)
@@ -193,11 +321,11 @@ void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNu
     //printf(RESET_ANSI"|");
     
 
-    colorHouse(house2);
+    colorHouse(game, house2, lineNum*3+1, false);
 
     printf("\n");
 
-    colorHouse(house1);
+    colorHouse(game, house1, lineNum*3+2, true);
 
     if (lineNum < 10)
     {
@@ -245,7 +373,7 @@ void printLineHouses(color_t house1, color_t house2, gameState *game, int lineNu
     //printf(RESET_ANSI"%-2d  |", 67 - lineNum);
 
 
-    colorHouse(house2);
+    colorHouse(game, house2, lineNum*3+2, false);
     printf("\n"); //21+1
 
 }
@@ -309,15 +437,15 @@ void printBoard(gameState *game)
 {
 
     // up part
-    colorHouse(yellow);
+    colorHouse(game, yellow, 0, true);
     printPlus(none);
-    colorHouse(green);
+    colorHouse(game, green, 0, false);
     for (int i = 0; i < 7; i++)
     {
         printLineHouses(yellow, green, game, i);
-        colorHouse(yellow);
+        colorHouse(game, yellow, i*3+3, true);
         printPlus(yellow);
-        colorHouse(green);
+        colorHouse(game, green, i*3+3, false);
     }
     printLineHouses(yellow, green, game, 7);
 
@@ -337,9 +465,6 @@ void printBoard(gameState *game)
         printf("| %-2d ", i);
     printf("|");
 
-
-    game->b.greenFinish = 2;
-    game->b.blueFinish = 1;
 
     //center 1
     for (int i = 0; i < 4; i++)
@@ -542,18 +667,18 @@ void printBoard(gameState *game)
     }
 
 
-    // down part
+    // down part  23
     for (int i = 12; i < 19; i++)
     {
         printLineHouses(blue, red, game, i);
-        colorHouse(blue);
+        colorHouse(game, blue, 3*i+3, true);
         printPlus(red);
-        colorHouse(red);
+        colorHouse(game, red, 3*i+3, false);
     }
     printLineHouses(blue, red, game, 19);
-    colorHouse(blue);
+    colorHouse(game, blue, 19*3+3, true);
     printPlus(none);
-    colorHouse(red);
+    colorHouse(game, red, 19*3+3, false);
 
     printf("\n");
 

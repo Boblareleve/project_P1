@@ -13,11 +13,11 @@ void initGameState(gameState* game)
     // Initialise tout le plateau à 0
     memset(&game->b, 0, sizeof(board_t));
 
-    game->numPlayers=getInput(integer,"Saisisez le nombre de joueurs: ");
-    while ((game->numPlayers<2) || (game->numPlayers>4))
+    game->numPlayers = getInput(integer,"Saisisez le nombre de joueurs: ");
+    while ((game->numPlayers < 2) || (game->numPlayers > 4))
     {
         printf("Erreur, nombre de joueurs invalide. Le nombre de joueurs possible est de 2 à 4\n");
-        game->numPlayers=getInput(integer,"Saisisez le nombre de joueurs: ");
+        game->numPlayers = getInput(integer,"Saisisez le nombre de joueurs: ");
     }
     
     for (int i = 0; i < game->numPlayers; i++) {
@@ -25,7 +25,7 @@ void initGameState(gameState* game)
         scanf("%s", game->playerNames[i]);
     }
 
-    game->curPlayer=yellow;
+    game->curPlayer = yellow;
 }
 
 void nextPlayer(gameState* game)
