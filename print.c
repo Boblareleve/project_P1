@@ -15,7 +15,7 @@
 
 //♞ ■♞ ■ ♟
 
-
+/*
 #ifdef USE_ANSI
     char r[] = RED_ANSI"♞"; //RESET_ANSI;
     char b[] = BLUE_ANSI"♞";//RESET_ANSI;
@@ -27,7 +27,7 @@
     char b[] = "b";
     char y[] = "j";
     char g[] = "v";
-#endif
+#endif*/
 
 static void interTile()
 {
@@ -210,22 +210,22 @@ static void printTile(gameState *game, int caseNum, color_t finishColor)
             if (tmp.yellowCount)
             {
                 tmp.yellowCount--;
-                tab[i] = y;
+                tab[i] = YELLOW_ANSI"♞";
             }
             else if (tmp.redCount)
             {
                 tmp.redCount--;
-                tab[i] = r;
+                tab[i] = RED_ANSI"♞";
             }
             else if (tmp.blueCount)
             {
                 tmp.blueCount--;
-                tab[i] = b;
+                tab[i] = BLUE_ANSI"♞";
             }
             else if (tmp.greenCount)
             {
                 tmp.greenCount--;
-                tab[i] = g;
+                tab[i] = GREEN_ANSI"♞";
             }
         }
         break;

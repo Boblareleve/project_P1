@@ -1,26 +1,5 @@
-#include <stdbool.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <time.h>
-#include "input.h"
-#include "print.h"
-#include "logic.h"
-#include "board.h"
+#include "main.h"
 
-
-/*
-typedef struct {
-        int a;
-        int b;
-        int c;
-    } d;
-
-    d papapapapa = {
-        1,
-        1,
-        1,
-    }*/
 
 
 
@@ -31,6 +10,8 @@ int main()
     //printf("\n");
     srand(time(NULL));
     gameState game;
+    initGameState(&game);
+
     printBoard(&game);
     return (1);
 
