@@ -26,3 +26,8 @@ tests.o : tests.c main.h
 
 clear :
 	rm *.o *.out
+
+re : clear make
+
+exe : re
+	./game.out

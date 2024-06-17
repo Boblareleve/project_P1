@@ -29,6 +29,26 @@
     char g[] = "v";
 #endif*/
 
+void printColor(color_t c)
+{
+    switch (c)
+    {
+    case yellow:
+        printf("jaune");
+        return ;
+    case red:
+        printf("rouge");
+        return ;
+    case blue:
+        printf("bleu");
+        return ;
+    case green:
+        printf("vert");
+        return ;
+    }
+    printf("[bug]");
+}
+
 static void interTile()
 {
     printf("+");

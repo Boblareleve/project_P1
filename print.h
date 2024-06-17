@@ -33,6 +33,6 @@
 
 
 void printBoard(gameState *game);
-
+void printColor(color_t c);
 
 #endif

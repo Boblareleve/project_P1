@@ -9,22 +9,25 @@ int main()
     //    printf("#");
     //printf("\n");
     srand(time(NULL));
-    gameState game;
-    initGameState(&game);
-
-    printBoard(&game);
-    return (1);
-
     printf("Bonjour bienvenu\n");
 
-    bool continue_play = false; 
-    char input[10];
-    do
-    {
-        getInput(YesNo, "commencer une partie ? (yes/no)\n");
-        
+    //gameState game;
+    //initGameState(&game);
+    //
+    //printBoard(&game);
 
-    } while (continue_play);
+
+    bool continue_play = getInput(YesNo, "Veux-tu commencer une partie ?\n");
+    while (continue_play)
+    {
+
+        play();
+
+        continue_play = getInput(YesNo, "Veux-tu rejouer une partie ?\n");
+    }
+
+
+
     
 
 }

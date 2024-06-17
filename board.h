@@ -28,7 +28,7 @@ typedef struct {
 	union {
 		struct {
 			FOUR_COLORS(tile_t, Zone[HOUSE_SIZE])
-		} houses;
+		} houseBoard;
 		tile_t bBoard[BOARD_SIZE];
 	};
 
@@ -36,8 +36,18 @@ typedef struct {
 	// rouge de la structure représente les cases rouges...
 	tile_t finishLine[7]; 
 
-	FOUR_COLORS(int, House)
-	FOUR_COLORS(int, Finish)
+	union {
+		struct {
+			FOUR_COLORS(int, House)
+		};
+		int houses[4];
+	};
+	union {
+		struct {
+			FOUR_COLORS(int, Finish)
+		};
+		int finishes[4];
+	};
 } board_t;
 
 // Indique si la case est un refuge (indépendant de l'état du jeu)
