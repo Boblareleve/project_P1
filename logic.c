@@ -75,6 +75,7 @@ int diceRoll(color_t c,  char* playerName)
     sleep(0.5);
     
     int result = rand()%6+1;
+    result = 6; //rand()%6+1;
     printf("Le nombre obtenu: %d\n",result);
     return result;
 }
@@ -115,7 +116,7 @@ bool pushPlayer(gameState *game, int pos, color_t c) {
         if (c == yellow && game->b.bBoard[pos].yellowCount >= 2)
             return (false);
 
-        while (barrageAtPos(game->b, pos+distancePush))
+        while (barrageAtPos(game->b, wrapAroundPos(pos+distancePush)))
             distancePush--;
         
         game->b.bBoard[pos].yellowCount--;
@@ -125,7 +126,7 @@ bool pushPlayer(gameState *game, int pos, color_t c) {
         if (c == blue && game->b.bBoard[pos].blueCount >= 2)
             return (false);
 
-        while (barrageAtPos(game->b, pos+distancePush))
+        while (barrageAtPos(game->b, wrapAroundPos(pos+distancePush)))
             distancePush--;
 
         game->b.bBoard[pos].blueCount--;
@@ -135,7 +136,7 @@ bool pushPlayer(gameState *game, int pos, color_t c) {
         if (c == red && game->b.bBoard[pos].redCount >= 2)
                 return (false);
 
-        while (barrageAtPos(game->b, pos+distancePush))
+        while (barrageAtPos(game->b, wrapAroundPos(pos+distancePush)))
             distancePush--;
         
         game->b.bBoard[pos].redCount--;
@@ -145,7 +146,7 @@ bool pushPlayer(gameState *game, int pos, color_t c) {
         if (c == green && game->b.bBoard[pos].greenCount >= 2)
                 return (false);
 
-        while (barrageAtPos(game->b, pos+distancePush))
+        while (barrageAtPos(game->b, wrapAroundPos(pos+distancePush)))
             distancePush--;
         
         game->b.bBoard[pos].greenCount--;
@@ -159,7 +160,7 @@ bool boardMouv(gameState *game, int dice) {
     do
     {
         // getInput()-1 pour récupèrer l'indice
-        int choice = getInput(integer, "choisit la case du pion que tu veux jouer :\n")-1;
+        int choice = getInput(integer, "choisit la case du pion que tu veux jouer : ")-1;
 
 
 
@@ -290,38 +291,42 @@ bool houseMouv(gameState *game, int dice) {
         }
         return (false);
     }
-    bool validMouv = true;
+
     switch (game->curPlayer)
     {
     case yellow:
         // un pion à sortir ?
         if (game->b.yellowHouse == 0) {
-            validMouv = false;
             printf("zone non valide tu n'as pas de pion à sortir\n");
-                printf("zone non valide tu as déjà un jaune sur le refuge\n");
-            break;
+            return (false);
+        }
+        if (totalHorseCount(game->b, 4) >= 2) {
+            printf("zone non valide trop de pion sur la sortie\n");
+            return (false);
         }
         
         // joueur soufflé ?
         if (game->b.bBoard[4].blueCount > 0
          || game->b.bBoard[4].redCount > 0
-         || game->b.bBoard[4].greenCount > 0) {
+         || game->b.bBoard[4].yellowCount > 0) {
             if (!pushPlayer(game, 4, yellow)) {
-                validMouv = false;
                 printf("zone non valide tu as déjà un jaune sur le refuge\n");
-                break;
+                return (false);
             }
         }
         game->b.bBoard[4].yellowCount++;
         game->b.yellowHouse--;
         printf("un pion jaune est sortie de la maison !\n");
-        break;
+        return (true);
     case red:
         // un pion à sortir ?
         if (game->b.redHouse == 0) {
-            validMouv = false;
             printf("zone non valide tu n'as pas de pion à sortir\n");
-            break;
+            return (false);
+        }
+        if (totalHorseCount(game->b, 38) >= 2) {
+            printf("zone non valide trop de pion sur la sortie\n");
+            return (false);
         }
 
         // joueur soufflé ?
@@ -329,63 +334,66 @@ bool houseMouv(gameState *game, int dice) {
          || game->b.bBoard[38].yellowCount > 0
          || game->b.bBoard[38].greenCount > 0) {
             if (!pushPlayer(game, 38, red)) {
-                validMouv = false;
                 printf("zone non valide tu as déjà un rouge sur le refuge\n");
-                break;
+                return (false);
             }
         }
         game->b.bBoard[38].redCount++;
         game->b.redHouse--;
         printf("un pion rouge est sortie de la maison !\n");
-        break;
+        return (true);
     case blue:
         // un pion à sortir ?
         if (game->b.blueHouse == 0) {
-            validMouv = false;
             printf("zone non valide tu n'as pas de pion à sortir\n");
-            break;
+            return (false);
+        }
+        if (totalHorseCount(game->b, 21) >= 2) {
+            printf("zone non valide trop de pion sur la sortie\n");
+            return (false);
         }
         // joueur soufflé ?
         if (game->b.bBoard[21].redCount > 0
          || game->b.bBoard[21].yellowCount > 0
          || game->b.bBoard[21].greenCount > 0) {
             if (!pushPlayer(game, 21, blue)) {
-                validMouv = false;
                 printf("zone non valide tu as déjà un bleu sur le refuge\n");
-                break;
+                return (false);
             }
         }
         game->b.bBoard[21].blueCount++;
         game->b.blueHouse--;
         printf("un pion bleu est sortie de la maison !\n");
-        break;
+        return (true);
     case green:
         // un pion à sortir ?
         if (game->b.greenHouse == 0) {
-            validMouv = false;
             printf("zone non valide tu n'as pas de pion à sortir\n");
-            break;
+            return (false);
+        }
+        if (totalHorseCount(game->b, 55) >= 2) {
+            printf("zone non valide trop de pion sur la sortie\n");
+            return (false);
         }
         // joueur soufflé ?
         if (game->b.bBoard[55].redCount > 0
          || game->b.bBoard[55].yellowCount > 0
          || game->b.bBoard[55].blueCount > 0) {
             if (!pushPlayer(game, 55, green)) {
-                validMouv = false;
                 printf("zone non valide tu as déjà un vert sur le refuge\n");
-                break;
+                return (false);
             }
         }
         game->b.bBoard[55].greenCount++;
         game->b.greenHouse--;
         printf("un pion vert est sortie de la maison !\n");
-        break;
+        return (true);
     
     default:
         printf("error\n");
         break;
     }
-    return (validMouv);
+    return (true);
 }
 
 bool finishMouv(gameState *game, int dice) {
@@ -397,7 +405,7 @@ void playerChoice(gameState *game, int dice) {
 
     bool validMouv = true;
     do {
-        areas_t zone = getInput(area, "choisit la zone du pion que tu veux bouger (m maison ; l line de fin ; p plateau) :\n");
+        areas_t zone = getInput(area, "choisit la zone du pion que tu veux bouger (m maison ; l line de fin ; p plateau) : ");
         color_t tmp_color;
 
 
