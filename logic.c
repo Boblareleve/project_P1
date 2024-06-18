@@ -377,7 +377,7 @@ void play() {
     
 
     do {
-
+        printBoard(&game);
         playerChoice(&game, 
             diceRoll(game.curPlayer,
                 getName(&game, game.curPlayer)

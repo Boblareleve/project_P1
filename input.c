@@ -47,7 +47,7 @@ int getInput(input_t type_dinput, char *msg)
         while (input[0] != house
             && input[0] != finish
             && input[0] != mainBoard
-             )
+            )
         {
             printf("zone invalid\n");
             scanf("%c", input);
