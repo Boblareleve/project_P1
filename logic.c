@@ -72,7 +72,7 @@ void nextPlayer(gameState* game)
 int diceRoll(color_t c,  char* playerName)
 {
     printColor(c); printf(" (%s) lance le dé...\n", playerName);
-    sleep(1.5);
+    sleep(0.5);
     
     int result = rand()%6+1;
     printf("Le nombre obtenu: %d\n",result);
@@ -160,40 +160,89 @@ bool boardMouv(gameState *game, int dice) {
     {
         // getInput()-1 pour récupèrer l'indice
         int choice = getInput(integer, "choisit la case du pion que tu veux jouer :\n")-1;
-        
+
 
 
         if (!horseColorInTile(game->b, choice, game->curPlayer)) {
             printf("tu n'as pas de pion sur cette case\n");
             valideTile = false;
         }
-        else
-        {
-
-        }
-         if (barrageAtPos(game->b, wrapAroundPos(choice + dice)) != game->curPlayer
-              && barrageAtPos(game->b, wrapAroundPos(choice + dice)) != none) {
-            printf("barrage sur le chemin tu ne peux pas jouer ce pion\n");
-            valideTile = false;
-        }
         else {
-            // barrage sur le chemin ?
+            // barrage sur le chemin ? + départ de finish
             bool barrage = false;
-            for (int i = choice+1; i <= choice + dice; i++) {
+            int i = choice+1;
+            while (i <= choice + dice) {
                 
-                if (finishEntrence(i, game->curPlayer)) {
-
+                if (finishEntrence(wrapAroundPos(i), game->curPlayer)) {
+                    barrage = -1;
+                    break;
                 }
 
                 barrage += barrageAtPos(game->b, wrapAroundPos(i)) != game->curPlayer
                         && barrageAtPos(game->b, wrapAroundPos(i)) != none;
+                i++;
             }
+            printf("bar %d\n", barrage);
+            
+            if (barrage == -1) {
+                // avancement sur la ligne de fin : choice + dice - i;
+                switch (game->curPlayer)
+                {
+                case yellow:
+                    printf("tu rentre sur la ligne de fin !\n");
+                    game->b.bBoard[choice].yellowCount--;
+                    game->b.finishLine[choice + dice - i].yellowCount++;
+                    return (true);
+                case red:
+                    printf("tu rentre sur la ligne de fin !\n");
+                    game->b.bBoard[choice].redCount--;
+                    game->b.finishLine[choice + dice - i].redCount++;
+                    return (true);
+                case blue:
+                    printf("tu rentre sur la ligne de fin !\n");
+                    game->b.bBoard[choice].blueCount--;
+                    game->b.finishLine[choice + dice - i].blueCount++;
+                    return (true);
+                case green:
+                    printf("tu rentre sur la ligne de fin !\n");
+                    game->b.bBoard[choice].greenCount--;
+                    game->b.finishLine[choice + dice - i].greenCount++;
+                    return (true);
+                default:
+                    printf("error");
+                    return (-1);
+                }
+            }
+            // cas d'un barrage
             if (barrage) {
                 printf("barrage sur le chemin tu ne peux pas jouer ce pion\n");
                 valideTile = false;
             }
+            // cas de coup valide
             else {
-                
+                printf("tu t'es déplacé en %d\n", choice+dice+1);
+                switch (game->curPlayer)
+                {
+                case yellow:
+                    game->b.bBoard[choice].yellowCount--;
+                    game->b.bBoard[wrapAroundPos(choice+dice)].yellowCount++;
+                    return (true);
+                case red:
+                    game->b.bBoard[choice].redCount--;
+                    game->b.bBoard[wrapAroundPos(choice+dice)].redCount++;
+                    return (true);
+                case blue:
+                    game->b.bBoard[choice].blueCount--;
+                    game->b.bBoard[wrapAroundPos(choice+dice)].blueCount++;
+                    return (true);
+                case green:
+                    game->b.bBoard[choice].greenCount--;
+                    game->b.bBoard[wrapAroundPos(choice+dice)].greenCount++;
+                    return (true);
+                default:
+                    printf("error");
+                    break;
+                }
             }
         }
 
