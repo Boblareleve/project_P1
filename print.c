@@ -221,10 +221,11 @@ static void printTile(gameState *game, int caseNum, color_t finishColor)
 {
     caseNum--;
     char *tab[2] = {" ", " "};
+    tile_t tmp;
     switch (finishColor)
     {
     case none:
-        tile_t tmp = game->b.bBoard[caseNum];
+        tmp = game->b.bBoard[caseNum];
         for (int i = 0; i < 2; i++)
         { 
             if (tmp.yellowCount)

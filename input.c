@@ -26,7 +26,7 @@ int getInput(input_t type_dinput, char *msg)
 
         } while ((strcmp(input, "oui") != 0) && (strcmp(input, "non") != 0));
 
-        return (input[0] == 'y');
+        return (input[0] == 'o');
 
     case integer:
         printf("%s", msg);
@@ -37,6 +37,22 @@ int getInput(input_t type_dinput, char *msg)
             exit(0);
         }
         return (atoi(input));
+
+    case area:
+
+        printf("%s", msg);
+        scanf("\n");
+        scanf("%c", input);
+        //printf("%c", input[0]);
+        while (input[0] != house
+            && input[0] != finish
+            && input[0] != mainBoard
+             )
+        {
+            printf("zone invalid\n");
+            scanf("%c", input);
+        }
+        return ((int)input[0]);
 
 
     default:

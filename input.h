@@ -8,12 +8,14 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "logic.h"
 
 
 typedef enum 
 {
     YesNo,
     integer,
+    area,
 
 } input_t;
 

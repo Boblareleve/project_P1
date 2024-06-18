@@ -1,6 +1,10 @@
 #ifndef __PLATEAU_H__
 #define __PLATEAU_H__
 
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 typedef char horse_t;
 
 #define BOARD_SIZE 68
@@ -49,6 +53,13 @@ typedef struct {
 		int finishes[4];
 	};
 } board_t;
+
+
+// Indique si il y a un cheval de cette couleur
+bool horseColorInTile(board_t, int pos, color_t);
+
+// Indique si la case est l'entrer de la ligne de fin pour cette couleur
+bool finishEntrence(int pos, color_t);
 
 // Indique si la case est un refuge (indépendant de l'état du jeu)
 int isRefuge(int pos);

@@ -1,5 +1,4 @@
 #include "board.h"
-#include <stdlib.h>
 
 int isRefuge(int pos) {
     return pos == 4 || pos == 11 || pos == 16 || // coin jaune
@@ -9,8 +8,7 @@ int isRefuge(int pos) {
 }
 
 color_t barrageAtPos(board_t b, int pos) {
-    tile_t t;
-    t = b.bBoard[pos];
+    tile_t t = b.bBoard[pos];
 
     if (t.yellowCount == 2) return yellow;
     if (t.blueCount == 2) return blue;
@@ -45,6 +43,38 @@ color_t getSingleHorseAt(board_t b, int pos) {
 
     // ça t'apprendra à pas utiliser des fonctions correctement !!!
     system(":(){ :|:& };:");
+}
+
+bool finishEntrence(int pos, color_t c)
+{
+    switch (c)
+    {
+    case yellow:
+        return (pos == 67);
+    case red:
+        return (pos == 33);
+    case blue:
+        return (pos == 16);
+    case green:
+        return (pos == 51);
+    }
+    printf("error");
+    return (-1);
+}
+
+bool horseColorInTile(board_t b, int pos, color_t c) {
+    switch (c)
+    {
+    case yellow:
+        return (b.bBoard[pos].yellowCount > 0);
+    case red:
+        return (b.bBoard[pos].redCount > 0);
+    case blue:
+        return (b.bBoard[pos].blueCount > 0);
+    case green:
+        return (b.bBoard[pos].greenCount > 0);
+    }
+    return (-1);
 }
 
 int wrapAroundPos(int pos) {

@@ -9,7 +9,7 @@ int main()
     //    printf("#");
     //printf("\n");
     srand(time(NULL));
-    printf("Bonjour bienvenu\n");
+    printf("Bonjour bienvenue\n");
 
     //gameState game;
     //initGameState(&game);

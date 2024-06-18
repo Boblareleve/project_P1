@@ -11,6 +11,14 @@ typedef struct {
 	
 } gameState;
 
+
+typedef enum {
+	house='m',
+	finishLine='l',
+	finish='f',
+	mainBoard='p'
+} areas_t;
+
 // initialise le jeu
 void initGameState(gameState*);
 
@@ -19,7 +27,7 @@ void initGameState(gameState*);
 void nextPlayer(gameState*);
 
 // simule le lancé de dé
-int diceRoll(char* playerName);
+int diceRoll(color_t, char* playerName);
 
 //
 color_t hasPlayerWon(gameState*);

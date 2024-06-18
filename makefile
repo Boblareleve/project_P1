@@ -1,5 +1,5 @@
 
-make : board.o input.o logic.o print.o main.o
+make : board.o logic.o print.o main.o input.o
 	gcc board.o input.o logic.o print.o main.o -o game.out
 
 make_test : board.o input.o logic.o print.o tests.o
@@ -25,7 +25,7 @@ tests.o : tests.c main.h
 
 
 clear :
-	rm *.o *.out
+	rm *.o 
 
 re : clear make
 
