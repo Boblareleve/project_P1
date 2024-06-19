@@ -32,15 +32,17 @@ void initGameState(gameState* game)
     scanf("%99s", game->playerNames[1]); // 1 -> bleu
     game->b.blueHouse = 4;
 
-    if (game->numPlayers > 2) {
+    if (game->numPlayers == 3) 
+    {
         printf("Joueur rouge, entrez votre nom: ");
-        scanf("%99s", game->playerNames[2]); // 1 -> rouge
+        scanf("%99s", game->playerNames[2]); // 2 -> rouge
         game->b.redHouse = 4;
-
-        if (game->numPlayers > 3)
-            game->b.greenHouse = 4;
-            printf("Joueur vert, entrez votre nom: ");
-            scanf("%99s", game->playerNames[3]); // 1 -> vert
+    }
+    if (game->numPlayers == 4)
+    {
+        game->b.greenHouse = 4;
+        printf("Joueur vert, entrez votre nom: ");
+        scanf("%99s", game->playerNames[3]); // 3 -> vert
     }
     memset(&(game->b.finishes), 0, sizeof(int) * 4);
 
