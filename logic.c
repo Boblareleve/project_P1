@@ -73,12 +73,16 @@ int diceRoll(color_t c,  char* playerName)
 {
     printColor(c); printf(" (%s) lance le dé...\n", playerName);
     sleep(0.5);
-    
+
+#ifndef CHEAT 
     int result = rand()%6+1;
-    result = 6; //rand()%6+1;
+#endif
+#ifdef CHEAT
+    int result = getInput(integer, "valeur du dé (1,6) :");
+#endif
     printf("Le nombre obtenu: %d\n",result);
-    return result;
-}
+    return result;,;
+}   aaaaaaaaaaaxAAAAvRF4FT5+GHHHHHHHHHHHHHHHHHHHHHLO20J°L.YU/BBBBBBBBBBBB%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%98885R42221E3WWWWWWWw
 
 color_t hasPlayerWon(gameState* game) {
     board_t* b = &(game->b);
@@ -459,6 +463,15 @@ void playerChoice(gameState *game, int dice) {
     
 }
 
+// renvoie -1 si pas de barrage sinon la case du barrage
+int searchBarrageCurPlayer(gameState *game) {
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        if (horseColorInTile(game->b, i, game->curPlayer) == 2) {
+            return (i);
+        }
+    }
+    return (-1);
+}
 
 void play() {
     gameState game;
@@ -476,11 +489,14 @@ void play() {
             game.b.bBoard[getInput(integer, "case :")-1].yellowCount++;
         }
         else {
-            playerChoice(&game, 
-                diceRoll(game.curPlayer,
-                    getName(&game, game.curPlayer)
-                )
-            );
+            int rollValue = diceRoll(game.curPlayer, getName(&game, game.curPlayer));
+            int haveABarrage = searchBarrageCurPlayer(&game);
+            // force le joueur à détruire sont barrage en cas de 6
+            if (rollValue == 6 && haveABarrage != -1) {
+                printf("tu as un barrage tu est donc obliger de le détruire !\n");
+
+            }
+            else playerChoice(&game, rollValue);
         }
 
 
