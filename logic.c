@@ -571,4 +571,8 @@ void play() {
         nextPlayer(&game);
     }
     while (hasPlayerWon(&game) == none); // A remplacer plus tard
+
+    printf("le joueur ");
+    printColor(game.curPlayer);
+    printf(" à gagné\n");
 }
