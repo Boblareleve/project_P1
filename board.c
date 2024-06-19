@@ -40,6 +40,7 @@ color_t getSingleHorseAt(board_t b, int pos) {
     if (t.blueCount == 1) return blue;
     if (t.redCount == 1) return red;
     if (t.greenCount == 1) return green;
+    else return none;
 }
 // Indique si la case est l'entrée de la ligne de fin de la couleur c
 bool finishEntrence(int pos, color_t c)
@@ -75,7 +76,7 @@ bool horseColorInTile(board_t b, int pos, color_t c) {
 }
 
 int wrapAroundPos(int pos) {
-    return pos % (BOARD_SIZE - 1);
+    return pos % (BOARD_SIZE);
 }
 
 color_t isMovePossible(board_t b, int startPos, int diceRoll, color_t curHorseColor, int* barrageShouldBeCreated, int* entersFinalLineAt) {

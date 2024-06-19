@@ -73,7 +73,7 @@ int inFrontOfStairs(color_t horse, int pos);
 
 // Retourne le nombre total de chevaux à une case donnée
 int totalHorseCount(board_t, int pos);
-// Cette fonction doit être appelée uniquement dans le cas où totalHorseCount(pos) == 1 !!
+// Cette fonction doit être appelée uniquement dans le cas où totalHorseCount(pos) <= 1 !!
 color_t getSingleHorseAt(board_t, int pos);
 // Fait en sorte que la position reste entre 0 et BOARD_SIZE
 int wrapAroundPos(int pos);
