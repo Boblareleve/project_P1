@@ -185,7 +185,7 @@ bool boardMouv(gameState *game, int dice) {
     do
     {
         // getInput()-1 pour récupèrer l'indice
-        int choice = getInput(integer, "choisit la case du pion que tu veux jouer : ")-1;
+        int choice = getInput(integer, "Choisis la case du pion que tu veux jouer : ")-1;
         if (choice < 0 || choice > 67) {
             printf("hors du plateau\n");
             return (false);
@@ -247,7 +247,7 @@ bool boardMouv(gameState *game, int dice) {
             }
             // cas d'un barrage
             if (barrage) {
-                printf("barrage sur le chemin tu ne peux pas jouer ce pion\n");
+                printf("barrage sur le chemin, tu ne peux pas jouer ce pion !\n");
                 valideTile = false;
             }
             // cas de coup valide
@@ -300,7 +300,7 @@ bool boardMouv(gameState *game, int dice) {
 bool houseMouv(gameState *game, int dice) {
     // peut sortir ?
     if (dice != 6) {
-        printf("zone non valide tu n'as pas fait un 6\n");
+        printf("zone non valide, tu n'as pas fait un 6\n");
         // joueur ne peux rien jouer d'autre ?
         switch (game->curPlayer)
         {
@@ -445,7 +445,7 @@ bool finishMouv(gameState *game, int dice) {
     bool end = false;
     while (!end)
     {
-        int choice = getInput(integer, "choisit la case du pion que tu veux jouer : ")-1;
+        int choice = getInput(integer, "Choisis la case du pion que tu veux jouer : ")-1;
         if (choice < 0 || choice > 6) {
             printf("hors du plateau\n");
             return (false);
@@ -507,7 +507,8 @@ void playerChoice(gameState *game, int dice) {
 
     bool validMouv = true;
     do {
-        char zone = (char)getInput(area, "choisit la zone du pion que tu veux bouger (m maison ; l line de fin ; p plateau) : ");
+
+        char zone = (char)getInput(area, "Choisis la zone de départ (m maison ; l line de fin ; p plateau) : ");
         color_t tmp_color;
 
 
@@ -558,7 +559,7 @@ void play() {
             int haveABarrage = searchBarrageCurPlayer(&game);
             // force le joueur à détruire sont barrage en cas de 6
             if (rollValue == 6 && haveABarrage != -1) {
-                printf("tu as un barrage tu est donc obliger de le détruire !\n");
+                printf("tu as un barrage, tu est donc obligé de le détruire !\n");
             }
             else playerChoice(&game, rollValue);
         }
