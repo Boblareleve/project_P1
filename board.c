@@ -60,7 +60,7 @@ bool finishEntrence(int pos, color_t c)
     return (-1);
 }
 // Indique s'il y a un cheval de couleur c sur la case pos
-int horseColorInTile(board_t b, int pos, color_t c) {
+bool horseColorInTile(board_t b, int pos, color_t c) {
     switch (c)
     {
     case yellow:
