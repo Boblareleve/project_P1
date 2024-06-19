@@ -77,6 +77,7 @@ int totalHorseCount(board_t, int pos);
 color_t getSingleHorseAt(board_t, int pos);
 // Fait en sorte que la position reste entre 0 et BOARD_SIZE
 int wrapAroundPos(int pos);
+
 // Retourne la couleur du potentiel cheval mangé, ou -1 si le coup ne peut pas être joué
 // barrageShouldBeCreated retourne 1 si un barrage doit être créé à la position finale
 // entersFinalLineAt retourne la position à laquelle le cheval entre dans la dernière ligne, 0 si il ne rentre pas dans la dernière ligne
