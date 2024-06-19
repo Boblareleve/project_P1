@@ -32,7 +32,7 @@ void initGameState(gameState* game)
     scanf("%99s", game->playerNames[1]); // 1 -> bleu
     game->b.blueHouse = 4;
 
-    if (game->numPlayers == 3) 
+    if (game->numPlayers >= 3) 
     {
         printf("Joueur rouge, entrez votre nom: ");
         scanf("%99s", game->playerNames[2]); // 2 -> rouge
