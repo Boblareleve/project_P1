@@ -5,7 +5,7 @@
 //definit la structure de jeu
 typedef struct {
 	int numPlayers;
-	char playerNames[100][4];
+	char playerNames[4][100];
 	color_t curPlayer;
 	board_t b;
 	

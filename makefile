@@ -2,8 +2,8 @@
 make : board.o logic.o print.o main.o input.o
 	gcc board.o input.o logic.o print.o main.o -o game.out
 
-make_test : board.o input.o logic.o print.o tests.o
-	gcc board.o input.o logic.o print.o tests.o -o test.out
+cheat : 
+	gcc -DCHEAT board.c input.c logic.c print.c main.c -o cheat_game.out
 
 board.o : board.c board.h
 	gcc -c board.c -o board.o

@@ -58,8 +58,8 @@ typedef struct {
 } board_t;
 
 
-// Indique si il y a un cheval de cette couleur
-bool horseColorInTile(board_t, int pos, color_t);
+// Indique le nombre de cheval de cette couleur sur cette tuile
+int horseColorInTile(board_t, int pos, color_t);
 
 // Indique si la case est l'entrer de la ligne de fin pour cette couleur
 bool finishEntrence(int pos, color_t);
