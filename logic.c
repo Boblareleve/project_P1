@@ -203,17 +203,20 @@ bool boardMouv(gameState *game, int dice) {
                 barrage = -1;
                 i--;
             }
-            else {while (i <= choice + dice) {
+            else {while (i < choice + dice) {
                 
                 if (finishEntrence(wrapAroundPos(i), game->curPlayer)) {
                     barrage = -1;
-                    break;
+                    goto FF;
                 }
 
                 barrage += barrageAtPos(game->b, wrapAroundPos(i)) != game->curPlayer
                         && barrageAtPos(game->b, wrapAroundPos(i)) != none;
                 i++;
-            }}
+            }
+            barrage += barrageAtPos(game->b, wrapAroundPos(i)) != game->curPlayer
+                    && barrageAtPos(game->b, wrapAroundPos(i)) != none;
+            } FF :
 
             // arrrive sur la ligne d'arrivé
             if (barrage == -1) {
