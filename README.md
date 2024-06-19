@@ -8,6 +8,8 @@ Les régles du jeu se trouvent dans le fichier "regles.txt"
 
 
 Execution du programme:
+Pour que le programme marche il faut d'abord aller dans votre terminal linux, et écrir <<sudo apt install make>>
+
 
 
 
