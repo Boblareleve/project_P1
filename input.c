@@ -1,8 +1,6 @@
 #include "input.h"
 
-
-
-
+//fonction qui permet de recuperer les inputs
 int getInput(input_t type_dinput, char *msg)
 {
     
@@ -10,7 +8,7 @@ int getInput(input_t type_dinput, char *msg)
     bool valide_input;
     char input[100];
 
-    switch (type_dinput)
+    switch (type_dinput) //définition du switch oui/non pour apres pouvir l'utiliser dans les fonctions tels que le lancé de dée
     {
     case YesNo:
         do
@@ -24,7 +22,7 @@ int getInput(input_t type_dinput, char *msg)
                 exit(0);
             }
 
-        } while ((strcmp(input, "oui") != 0) && (strcmp(input, "non") != 0));
+        } while ((strcmp(input, "oui") != 0) && (strcmp(input, "non") != 0));//les inputs sont obligatoirement en français(oui/non)
 
         return (input[0] == 'o');
 
