@@ -59,7 +59,7 @@ bool finishEntrence(int pos, color_t c)
     printf("error");
     return (-1);
 }
-// 
+// Indique s'il y a un cheval de couleur c sur la case pos
 bool horseColorInTile(board_t b, int pos, color_t c) {
     switch (c)
     {
@@ -74,7 +74,7 @@ bool horseColorInTile(board_t b, int pos, color_t c) {
     }
     return (-1);
 }
-
+// Controle pour que la position reste dans les limites du plateau (0-BOARD_SIZE)
 int wrapAroundPos(int pos) {
     return pos % (BOARD_SIZE);
 }
