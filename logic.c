@@ -74,9 +74,9 @@ void nextPlayer(gameState* game)
 int diceRoll(color_t c,  char* playerName)
 {
     printColor(c); printf(" (%s) lance le dé...\n", playerName);
-    sleep(0.5);
 
 #ifndef CHEAT 
+    sleep(1);
     int result = rand()%6+1;
 #endif
 #ifdef CHEAT
@@ -547,14 +547,14 @@ void play() {
 
     do {
         printBoard(&game);
-
-        bool cheat_debug = getInput(YesNo, "cheat :");
         
-        if (cheat_debug) {
-            game.b.yellowHouse--;
-            game.b.bBoard[getInput(integer, "case :")-1].yellowCount++;
-        }
-        else {
+        //bool cheat_debug = getInput(YesNo, "cheat :");
+        //
+        //if (cheat_debug) {
+        //    game.b.yellowHouse--;
+        //    game.b.bBoard[getInput(integer, "case :")-1].yellowCount++;
+        //}
+        //else {
             int rollValue = diceRoll(game.curPlayer, getName(&game, game.curPlayer));
             int haveABarrage = searchBarrageCurPlayer(&game);
             // force le joueur à détruire sont barrage en cas de 6
@@ -562,7 +562,7 @@ void play() {
                 printf("tu as un barrage tu est donc obliger de le détruire !\n");
             }
             else playerChoice(&game, rollValue);
-        }
+        //}
 
 
         nextPlayer(&game);
