@@ -2,7 +2,7 @@
 #define __LOGIC_H__
 
 #include "board.h"
-
+//definit la structure de jeu
 typedef struct {
 	int numPlayers;
 	char playerNames[100][4];
@@ -11,13 +11,14 @@ typedef struct {
 	
 } gameState;
 
-
+//definit les zones du plateau
 typedef enum {
 	house='m',
 	finishLine='l',
 	finish='f',
 	mainBoard='p'
 } areas_t;
+
 
 // initialise le jeu
 void initGameState(gameState*);
@@ -29,7 +30,7 @@ void nextPlayer(gameState*);
 // simule le lancé de dé
 int diceRoll(color_t, char* playerName);
 
-//
+// constate qu'un le joueur a gagné
 color_t hasPlayerWon(gameState*);
 
 // lance la partie
