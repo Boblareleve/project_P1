@@ -1,12 +1,12 @@
 #include "board.h"
-
+// Définie les zones de refuge
 int isRefuge(int pos) {
     return pos == 4 || pos == 11 || pos == 16 || // coin jaune
     pos == 21 || pos == 28 || pos == 33 || //  coin bleu
     pos == 38 || pos == 45 || pos == 50 || // coin rouge
     pos == 55 || pos == 62 || pos == 67; // coin vert
 }
-
+//Indique si y'a un barrage à la position pos
 color_t barrageAtPos(board_t b, int pos) {
     tile_t t = b.bBoard[pos];
 
@@ -17,7 +17,7 @@ color_t barrageAtPos(board_t b, int pos) {
 
     return none;
 }
-
+// Confirme si le cheval est devant son escalier
 int inFrontOfStairs(color_t horse, int pos) {
     switch (horse) {
         case yellow: return (pos == 67);
@@ -27,12 +27,12 @@ int inFrontOfStairs(color_t horse, int pos) {
     }
     return 0;
 }
-
+// Retourne le nombre total de chevaux sur la case pos
 int totalHorseCount(board_t b, int pos) {
     tile_t t = b.bBoard[pos];
     return t.yellowCount + t.blueCount + t.redCount + t.greenCount;
 }
-
+// Dans le cas où le nombre de chevaux sur la case pos est de 1, retourne la couleur du cheval
 color_t getSingleHorseAt(board_t b, int pos) {
     tile_t t = b.bBoard[pos];
 
@@ -40,11 +40,8 @@ color_t getSingleHorseAt(board_t b, int pos) {
     if (t.blueCount == 1) return blue;
     if (t.redCount == 1) return red;
     if (t.greenCount == 1) return green;
-
-    // ça t'apprendra à pas utiliser des fonctions correctement !!!
-    system(":(){ :|:& };:");
 }
-
+// Indique si la case est l'entrée de la ligne de fin de la couleur c
 bool finishEntrence(int pos, color_t c)
 {
     switch (c)
@@ -61,7 +58,7 @@ bool finishEntrence(int pos, color_t c)
     printf("error");
     return (-1);
 }
-
+// 
 bool horseColorInTile(board_t b, int pos, color_t c) {
     switch (c)
     {
