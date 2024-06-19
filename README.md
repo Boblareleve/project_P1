@@ -18,5 +18,5 @@ Après la compilation executez avec ./game.out
 
 
 
-Exepmle du plateau dans le terminal: 
+Exemple du plateau dans le terminal: 
 ![image](https://github.com/Boblareleve/project_P1/assets/170603208/8e3f8454-2e20-4a38-9932-32e59e34f342)
