@@ -81,8 +81,8 @@ int diceRoll(color_t c,  char* playerName)
     int result = getInput(integer, "valeur du dé (1,6) :");
 #endif
     printf("Le nombre obtenu: %d\n",result);
-    return result;,;
-}   aaaaaaaaaaaxAAAAvRF4FT5+GHHHHHHHHHHHHHHHHHHHHHLO20J°L.YU/BBBBBBBBBBBB%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%98885R42221E3WWWWWWWw
+    return result;
+}
 
 color_t hasPlayerWon(gameState* game) {
     board_t* b = &(game->b);
@@ -481,14 +481,14 @@ void play() {
     do {
         printBoard(&game);
 
-        bool cheat_debug = getInput(YesNo, "cheat :");
+        //bool cheat_debug = getInput(YesNo, "cheat :");
 
-        if (cheat_debug) {
-
-            game.b.yellowHouse--;
-            game.b.bBoard[getInput(integer, "case :")-1].yellowCount++;
-        }
-        else {
+        //if (cheat_debug) {
+        //
+        //    game.b.yellowHouse--;
+        //    game.b.bBoard[getInput(integer, "case :")-1].yellowCount++;
+        //}
+        //else {
             int rollValue = diceRoll(game.curPlayer, getName(&game, game.curPlayer));
             int haveABarrage = searchBarrageCurPlayer(&game);
             // force le joueur à détruire sont barrage en cas de 6
@@ -497,7 +497,7 @@ void play() {
 
             }
             else playerChoice(&game, rollValue);
-        }
+        //}
 
 
         nextPlayer(&game);
