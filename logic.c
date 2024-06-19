@@ -446,7 +446,7 @@ bool finishMouv(gameState *game, int dice) {
     bool end = false;
     while (!end);
     {
-        int choice = getInput(integer, "choisit la case du pion que tu veux jouer : ")-1;
+        int choice = getInput(integer, "Choisis la case du pion que tu veux jouer : ")-1;
         if (choice < 0 || choice > 6) {
             printf("hors du plateau\n");
             end = false;
@@ -508,7 +508,7 @@ void playerChoice(gameState *game, int dice) {
 
     bool validMouv = true;
     do {
-        areas_t zone = getInput(area, "choisit la zone du pion que tu veux bouger (m maison ; l line de fin ; p plateau) : ");
+        areas_t zone = getInput(area, "Choisis la zone de départ (m maison ; l line de fin ; p plateau) : ");
         color_t tmp_color;
 
 
@@ -559,7 +559,7 @@ void play() {
             int haveABarrage = searchBarrageCurPlayer(&game);
             // force le joueur à détruire sont barrage en cas de 6
             if (rollValue == 6 && haveABarrage != -1) {
-                printf("tu as un barrage tu est donc obliger de le détruire !\n");
+                printf("tu as un barrage, tu est donc obligé de le détruire !\n");
             }
             else playerChoice(&game, rollValue);
         //}
