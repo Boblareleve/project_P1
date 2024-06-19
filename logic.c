@@ -185,7 +185,7 @@ bool boardMouv(gameState *game, int dice) {
     do
     {
         // getInput()-1 pour récupèrer l'indice
-        int choice = getInput(integer, "choisit la case du pion que tu veux jouer : ")-1;
+        int choice = getInput(integer, "Choisis la case du pion que tu veux jouer : ")-1;
         if (choice < 0 || choice > 67) {
             printf("hors du plateau\n");
             return (false);
@@ -248,7 +248,7 @@ bool boardMouv(gameState *game, int dice) {
             }
             // cas d'un barrage
             if (barrage) {
-                printf("barrage sur le chemin tu ne peux pas jouer ce pion\n");
+                printf("barrage sur le chemin, tu ne peux pas jouer ce pion !\n");
                 valideTile = false;
             }
             // cas de coup valide
@@ -301,7 +301,7 @@ bool boardMouv(gameState *game, int dice) {
 bool houseMouv(gameState *game, int dice) {
     // peut sortir ?
     if (dice != 6) {
-        printf("zone non valide tu n'as pas fait un 6\n");
+        printf("zone non valide, tu n'as pas fait un 6\n");
         // joueur ne peux rien jouer d'autre ?
         switch (game->curPlayer)
         {
