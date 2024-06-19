@@ -9,13 +9,14 @@ typedef char horse_t;
 
 #define BOARD_SIZE 68
 #define HOUSE_SIZE (BOARD_SIZE / 4)
-
+//définit les parametres du plateau
 #define FOUR_COLORS(type, name) \
 	type yellow##name; \
 	type blue##name; \
 	type red##name; \
 	type green##name; \
 
+// Définit les couleurs
 typedef enum {
 	none = ' ',
 	yellow = 'y',
@@ -24,10 +25,12 @@ typedef enum {
 	green = 'g'
 } color_t;
 
+// Définit les cases du plateau
 typedef struct {
 	FOUR_COLORS(int, Count)
 } tile_t;
 
+// Définit le plateau
 typedef struct {
 	union {
 		struct {
