@@ -186,9 +186,11 @@ bool boardMouv(gameState *game, int dice) {
     {
         // getInput()-1 pour récupèrer l'indice
         int choice = getInput(integer, "choisit la case du pion que tu veux jouer : ")-1;
-
-
-
+        if (choice < 0 || choice > 67) {
+            printf("hors du plateau\n");
+            return (false);
+        }
+        else {
         if (!horseColorInTile(game->b, choice, game->curPlayer)) {
             printf("tu n'as pas de pion sur cette case\n");
             valideTile = false;
@@ -197,7 +199,11 @@ bool boardMouv(gameState *game, int dice) {
             // barrage sur le chemin ? + départ de finish
             int barrage = 0;
             int i = choice+1;
-            while (i <= choice + dice) {
+            if (finishEntrence(wrapAroundPos(choice), game->curPlayer)) {
+                barrage = -1;
+                i--;
+            }
+            else {while (i <= choice + dice) {
                 
                 if (finishEntrence(wrapAroundPos(i), game->curPlayer)) {
                     barrage = -1;
@@ -207,7 +213,7 @@ bool boardMouv(gameState *game, int dice) {
                 barrage += barrageAtPos(game->b, wrapAroundPos(i)) != game->curPlayer
                         && barrageAtPos(game->b, wrapAroundPos(i)) != none;
                 i++;
-            }
+            }}
             printf("bar %d\n", barrage);
 
             // arrrive sur la ligne d'arrivé
@@ -284,6 +290,7 @@ bool boardMouv(gameState *game, int dice) {
                     break;
                 }
             }
+        }
         }
     } while (!valideTile);
 
@@ -435,6 +442,64 @@ bool houseMouv(gameState *game, int dice) {
 }
 
 bool finishMouv(gameState *game, int dice) {
+
+    bool end = false;
+    while (!end);
+    {
+        int choice = getInput(integer, "choisit la case du pion que tu veux jouer : ")-1;
+        if (choice < 0 || choice > 6) {
+            printf("hors du plateau\n");
+            end = false;
+        }
+        else if (choice + dice <= 7)
+        //&& finishCountColor(game, game->curPlayer) < 2) {
+            switch (game->curPlayer)
+            {
+            case yellow:
+                if (choice + dice == 7)
+                    game->b.yellowFinish++;
+                else game->b.finishLine[choice + dice].yellowCount++;
+                
+                game->b.finishLine[choice].yellowCount--;
+                return (true);
+
+            case red:
+                if (choice + dice == 7) 
+                    game->b.redFinish++;
+                else game->b.finishLine[choice + dice].redCount++;
+
+                game->b.finishLine[choice].redCount--;
+                return (true);
+
+            case blue:
+                if (choice + dice == 7) 
+                    game->b.blueFinish++;
+                else game->b.finishLine[choice + dice].blueCount++;
+
+                game->b.finishLine[choice].blueCount--;
+                return (true);
+
+            case green:
+                if (choice + dice == 7) 
+                    game->b.greenFinish++;
+                else game->b.finishLine[choice + dice].greenCount++;
+
+                game->b.finishLine[choice].greenCount--;
+                return (true);
+                
+            default:
+                printf("error");
+                break;
+            }
+        
+        else {
+            printf("trop grand pour ce pion\n");
+            end = false;
+        }
+    }
+        
+    
+
     return (false);
 }
 
@@ -483,23 +548,21 @@ void play() {
     do {
         printBoard(&game);
 
-        //bool cheat_debug = getInput(YesNo, "cheat :");
-
-        //if (cheat_debug) {
-        //
-        //    game.b.yellowHouse--;
-        //    game.b.bBoard[getInput(integer, "case :")-1].yellowCount++;
-        //}
-        //else {
+        bool cheat_debug = getInput(YesNo, "cheat :");
+        
+        if (cheat_debug) {
+            game.b.yellowHouse--;
+            game.b.bBoard[getInput(integer, "case :")-1].yellowCount++;
+        }
+        else {
             int rollValue = diceRoll(game.curPlayer, getName(&game, game.curPlayer));
             int haveABarrage = searchBarrageCurPlayer(&game);
             // force le joueur à détruire sont barrage en cas de 6
             if (rollValue == 6 && haveABarrage != -1) {
                 printf("tu as un barrage tu est donc obliger de le détruire !\n");
-
             }
             else playerChoice(&game, rollValue);
-        //}
+        }
 
 
         nextPlayer(&game);
