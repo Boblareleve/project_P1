@@ -9,7 +9,9 @@ Les régles du jeu se trouvent dans le fichier "regles.txt"
 
 Execution du programme:
 Pour que le programme marche il faut d'abord aller dans votre terminal linux, et écrir <<sudo apt install make>>
-
+Telecharger le dossier avec les fichiers *.c et *.h à partir de cet répértoire 
+Dans le terminal deplacez vous vers le dossier telechargé, et compilez avec la comamande <<make>>
+Après la compilation executez avec ./game.out
 
 
 
