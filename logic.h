@@ -13,9 +13,11 @@ typedef struct {
 
 //definit les zones du plateau
 typedef enum {
+	//house='m',
 	house='m',
-	//finishLine='l',
+	//finish='l',
 	finish='l',
+	//mainBoard='p'
 	mainBoard='p'
 } areas_t;
 

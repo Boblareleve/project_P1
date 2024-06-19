@@ -141,7 +141,7 @@ bool pushPlayer(gameState *game, int pos, color_t c) {
         if (c == yellow && game->b.bBoard[pos].yellowCount >= 2)
             return (false);
 
-        while (barrageAtPos(game->b, wrapAroundPos(pos+distancePush)))
+        while (barrageAtPos(game->b, wrapAroundPos(pos+distancePush)) && distancePush > 0)
             distancePush--;
         
         game->b.bBoard[pos].yellowCount--;
@@ -214,7 +214,6 @@ bool boardMouv(gameState *game, int dice) {
                         && barrageAtPos(game->b, wrapAroundPos(i)) != none;
                 i++;
             }}
-            printf("bar %d\n", barrage);
 
             // arrrive sur la ligne d'arrivé
             if (barrage == -1) {
@@ -442,14 +441,14 @@ bool houseMouv(gameState *game, int dice) {
 }
 
 bool finishMouv(gameState *game, int dice) {
-
+    printf("in finish Mouv\n");
     bool end = false;
-    while (!end);
+    while (!end)
     {
         int choice = getInput(integer, "choisit la case du pion que tu veux jouer : ")-1;
         if (choice < 0 || choice > 6) {
             printf("hors du plateau\n");
-            end = false;
+            return (false);
         }
         else if (choice + dice <= 7)
         //&& finishCountColor(game, game->curPlayer) < 2) {
@@ -508,20 +507,20 @@ void playerChoice(gameState *game, int dice) {
 
     bool validMouv = true;
     do {
-        areas_t zone = getInput(area, "choisit la zone du pion que tu veux bouger (m maison ; l line de fin ; p plateau) : ");
+        char zone = (char)getInput(area, "choisit la zone du pion que tu veux bouger (m maison ; l line de fin ; p plateau) : ");
         color_t tmp_color;
 
 
         // sort de la maison
-        if (zone == 'm') {
+        if (zone == house) {
             validMouv = houseMouv(game, dice);
         }
         // bouge sur le plateau
-        else if (zone == 'p') {
+        else if (zone == mainBoard) {
             validMouv = boardMouv(game, dice);
         }
         // bouge sur la ligne de fin
-        else if (zone == 'l') {
+        else if (zone == finish) {
             validMouv = finishMouv(game, dice);
         }
         else printf("error\n");
@@ -548,13 +547,13 @@ void play() {
     do {
         printBoard(&game);
         
-        //bool cheat_debug = getInput(YesNo, "cheat :");
-        //
-        //if (cheat_debug) {
-        //    game.b.yellowHouse--;
-        //    game.b.bBoard[getInput(integer, "case :")-1].yellowCount++;
-        //}
-        //else {
+        bool cheat_debug = getInput(YesNo, "cheat :");
+        
+        if (cheat_debug) {
+            game.b.yellowHouse--;
+            game.b.bBoard[getInput(integer, "case :")-1].yellowCount++;
+        }
+        else {
             int rollValue = diceRoll(game.curPlayer, getName(&game, game.curPlayer));
             int haveABarrage = searchBarrageCurPlayer(&game);
             // force le joueur à détruire sont barrage en cas de 6
@@ -562,7 +561,7 @@ void play() {
                 printf("tu as un barrage tu est donc obliger de le détruire !\n");
             }
             else playerChoice(&game, rollValue);
-        //}
+        }
 
 
         nextPlayer(&game);
