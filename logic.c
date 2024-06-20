@@ -550,22 +550,13 @@ void play() {
 
     do {
         printBoard(&game);
-        
-        bool cheat_debug = getInput(YesNo, "cheat :");
-        
-        if (cheat_debug) {
-            game.b.yellowHouse--;
-            game.b.bBoard[getInput(integer, "case :")-1].yellowCount++;
+        int rollValue = diceRoll(game.curPlayer, getName(&game, game.curPlayer));
+        int haveABarrage = searchBarrageCurPlayer(&game);
+        // force le joueur à détruire sont barrage en cas de 6
+        if (rollValue == 6 && haveABarrage != -1) {
+            printf("tu as un barrage, tu est donc obligé de le détruire !\n");
         }
-        else {
-            int rollValue = diceRoll(game.curPlayer, getName(&game, game.curPlayer));
-            int haveABarrage = searchBarrageCurPlayer(&game);
-            // force le joueur à détruire sont barrage en cas de 6
-            if (rollValue == 6 && haveABarrage != -1) {
-                printf("tu as un barrage, tu est donc obligé de le détruire !\n");
-            }
-            else playerChoice(&game, rollValue);
-        }
+        else playerChoice(&game, rollValue);
 
 
         nextPlayer(&game);
